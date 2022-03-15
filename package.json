@@ -1,0 +1,19 @@
+{
+  "name": "front_blockchain_tfe",
+  "version": "1.0.0",
+  "description": "Trabajo fin de experto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/creacodigos/front_blockchain_tfe.git"
+  },
+  "author": "Jorge Santana, Iván Domínguez, Yael Hernández",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/creacodigos/front_blockchain_tfe/issues"
+  },
+  "homepage": "https://github.com/creacodigos/front_blockchain_tfe#readme"
+}
