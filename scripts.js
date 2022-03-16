@@ -1,15 +1,14 @@
-
 let ethereum = null;
 let accounts = [];
-let account = null;
+let account  = null;
+let provider = null;
 
 const ethereumButton = document.querySelector('.enableEthereumButton');
-const showAccount = document.querySelector('#showAccount');
-const walletInfo = document.querySelector('#wallet_info');
-const sendEthButton = document.querySelector('.sendEthButton');
-const inputAmount = document.querySelector('input#amount');
-const inputWalletTo = document.querySelector('input#wallet_to');
-
+const showAccount    = document.querySelector('#showAccount');
+const walletInfo     = document.querySelector('#wallet_info');
+const sendEthButton  = document.querySelector('.sendEthButton');
+const inputAmount    = document.querySelector('input#amount');
+const inputWalletTo  = document.querySelector('input#wallet_to');
 
 // Función que verifica si es Metamask
 function isMetamask (){
@@ -28,15 +27,19 @@ function initMetamask(){
         //window.alert('MetaMask is installed!');
 
         ethereum = window.ethereum;
+        provider = await detectEthereumProvider();
+
         setWalletInfo();
 
         ethereum.on('accountsChanged', function (_accounts) {
             // Time to reload your interface with accounts[0]!
             accounts = _accounts
-            account = accounts[0];
+            account  = accounts[0];
             showAccount.value = account;
             setWalletInfo();
         });
+
+        console.log('ethers', ethers);
 
         return true;
     }
@@ -92,6 +95,27 @@ sendEthButton.addEventListener('click', () => {
         .then((txHash) => console.log(txHash))
         .catch((error) => console.error);
 });
+
+async function sendMethod(params){ 
+
+
+    const ethersProvider = new ethers.providers.Web3Provider(provider);
+    const signer = await ethersProvider.getSigner(account);
+    //value.from, ethers.utils.isAddress(value.from),
+
+    console.log("sendMethod()", params);
+
+    const contrato = new ethers.Contract(direccionContrato, ABI, signer);
+    console.log("sendMethod() - contrato: ",contrato);
+
+    const transaccion = await contrato.metodo(params);
+    console.log("sendMethod() - transaccion: ",transaccion);
+
+    const respuesta = await transaccion.wait();
+    console.log("sendMethod() - respuesta: ",respuesta);
+
+    return respuesta;
+}
   
 
 /* EJECUCiÖN */

@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/creacodigos/front_blockchain_tfe/issues"
   },
-  "homepage": "https://github.com/creacodigos/front_blockchain_tfe#readme"
+  "homepage": "https://github.com/creacodigos/front_blockchain_tfe#readme",
+  "dependencies": {}
 }
