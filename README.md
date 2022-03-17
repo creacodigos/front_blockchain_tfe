@@ -65,15 +65,23 @@ Agregamos openZeppelin los contratos:
 
 `yarn add @openzeppelin/contracts`
 
+Iniciamos truflle:
 
 `yarn truffle init`
 
-yarn truffle develop (prueba local)
+Ejecutamos una prueba de la red en local:
 
-yarn truffle migrate (Compila y despliega contratos)
+`yarn truffle develop (prueba local)`
+
+Ejecutamos la compilación el despliegue de contratos en local (simula lo que haría en real): 
+
+`yarn truffle migrate (Compila y despliega contratos)`
 
 Creamos cuenta en infura y cambiamos la configuración de `truffle-config.js`
+Para usar el provider con private key de lacuenta de ethereum asociada para el cas de Ethers
 
-yarn add truffle-privatekey-provider (para usar el provider con private key de lacuenta de ethereum asociada para el cas de Ethers)
+`yarn add truffle-privatekey-provider`
 
-yarn truffle migrate --network rinkeby (Compila y despliegua contratos en rinkeby)
+Ejecutamos la compilación en rinkeby:
+
+`yarn truffle migrate --network rinkeby (Compila y despliegua contratos en rinkeby)`
