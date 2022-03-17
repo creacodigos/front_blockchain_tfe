@@ -10,6 +10,19 @@ const sendEthButton  = document.querySelector('.sendEthButton');
 const inputAmount    = document.querySelector('input#amount');
 const inputWalletTo  = document.querySelector('input#wallet_to');
 
+import Parcela from './ParcelaContract.js';
+import FumiToken from './FumiTokenContract.js';
+/*import Dron from './build/contracts/DronContract.json';
+import FumiToken from './build/contracts/FumiTokenContract.json';
+import Fumigacion from './build/contracts/FumigacionContract.json';*/
+
+const address = {
+    Parcela : '0xe64788a775D68D0F9D8ea3cb20C4e671dc441Ada',
+    Dron : '0x78c824397dE1c0C66519d498D9A0329d1ac85457',
+    FumiToken : '0x57B33D4aEA134e568c147EbfCfB286ae6BbA0a53',
+    Fumigacion : '0x35f0A7C227DEB8B0dFef7d27F0f1Bd30787d34ed'
+}
+
 // Función que verifica si es Metamask
 function isMetamask (){
     
@@ -20,7 +33,7 @@ function isMetamask (){
 }
 
 // Función que inicia Metamask y escucha el cambio de cuentas:
-function initMetamask(){
+async function initMetamask(){
 
     if (typeof window.ethereum !== 'undefined') {
 
@@ -38,6 +51,8 @@ function initMetamask(){
             showAccount.value = account;
             setWalletInfo();
         });
+
+        sendMethod('FumiToken','decimals');
 
         console.log('ethers', ethers);
 
@@ -96,29 +111,26 @@ sendEthButton.addEventListener('click', () => {
         .catch((error) => console.error);
 });
 
-async function sendMethod(params){ 
+async function sendMethod(abi = 'FumiToken', metodo = 'decimals', params = null){ 
 
+    console.log("sendMethod() - datos - ", abi, metodo, params);
+    console.log("sendMethod() - ABI - ", FumiToken.abi);
 
     const ethersProvider = new ethers.providers.Web3Provider(provider);
     const signer = await ethersProvider.getSigner(account);
     //value.from, ethers.utils.isAddress(value.from),
 
-    console.log("sendMethod()", params);
-
-    const contrato = new ethers.Contract(direccionContrato, ABI, signer);
+    const contrato = new ethers.Contract(address[abi], FumiToken.abi, signer);
     console.log("sendMethod() - contrato: ",contrato);
 
-    const transaccion = await contrato.metodo(params);
+    const transaccion = await contrato[metodo](params);
     console.log("sendMethod() - transaccion: ",transaccion);
 
-    const respuesta = await transaccion.wait();
-    console.log("sendMethod() - respuesta: ",respuesta);
-
-    return respuesta;
+    return transaccion;
 }
   
 
 /* EJECUCiÖN */
 
 if(isMetamask())
-    initMetamask();
+    await initMetamask();

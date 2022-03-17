@@ -1,3 +1,4 @@
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0; 
 
 //Importamos
@@ -5,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 //Extendemos del contrato ERC721 (Contrato destinado a Tokens no fungibles)
-contract Dron is ERC721 {
+contract DronContract is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter UltimoID;
 
@@ -57,7 +58,7 @@ contract Dron is ERC721 {
         _;
     }
 
-    function CrearDron(address EMPRESA, int256 MIN, int256 MAX, _Pesticidas PESTICIDA, uint256 COSTE) public returns (uint256){
+    function CrearDron(address EMPRESA, int256 MIN, int256 MAX, _Pesticidas[] calldata PESTICIDA, uint256 COSTE) public returns (uint256){
         UltimoID.increment();
         uint256 IDActual = UltimoID.current();
 

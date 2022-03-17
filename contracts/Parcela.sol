@@ -1,3 +1,4 @@
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0; 
 
 //Importamos
@@ -5,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 //Extendemos del contrato ERC721 (Contrato destinado a Tokens no fungibles)
-contract Parcela is ERC721 {
+contract ParcelaContract is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter UltimoID;
 

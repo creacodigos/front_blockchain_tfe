@@ -1,3 +1,4 @@
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0; 
 
 //Importamos
@@ -11,7 +12,7 @@ import "./Dron.sol";
 import "./Parcela.sol";
 
 //Extendemos del contrato ERC721 (Contrato destinado a Tokens no fungibles)
-contract Fumigacion is Ownable {
+contract FumigacionContract is Ownable {
     using EnumerableSet for EnumerableSet.AddressSet;
     using Counters for Counters.Counter;
     Counters.Counter UltimoID;
@@ -28,10 +29,10 @@ contract Fumigacion is Ownable {
     mapping(uint256 => Solicitud_Fumigacion) private _Solicitudes_Fumigacion;
 
     ERC20 _FumiToken;
-    Dron _Dron;
-    Parcela _Parcela;
+    DronContract _Dron;
+    ParcelaContract _Parcela;
 
-    constructor(ERC20 FumiToken, Dron Dron_, Parcela Parcela_) {
+    constructor(ERC20 FumiToken, DronContract Dron_, ParcelaContract Parcela_) {
         _FumiToken = FumiToken;
         _Dron = Dron_;
         _Parcela = Parcela_;
@@ -73,9 +74,9 @@ contract Fumigacion is Ownable {
 
     function PagarFumigacion(uint256 IDSolicitud_Fumigacion) public {
         //solicitar info Dron
-        Dron.Dron memory Dron_ = _Dron.ObtenerInfoDron(_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._IDDron);
+        DronContract.Dron memory Dron_ = _Dron.ObtenerInfoDron(_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._IDDron);
         //solicitar info Parcela
-        Parcela.Parcela memory Parcela_ = _Parcela.ObtenerInfoParcela(_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._IDParcela);
+        ParcelaContract.Parcela memory Parcela_ = _Parcela.ObtenerInfoParcela(_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._IDParcela);
 
         require (msg.sender == Parcela_._Owner, "Solo el propietario de la parcela puede pagar");
         
