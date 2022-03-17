@@ -65,7 +65,7 @@ Agregamos openZeppelin los contratos:
 
 `yarn add @openzeppelin/contracts`
 
-Iniciamos truflle:
+Iniciamos truflle (si es la primera ejecución tras su instalación):
 
 `yarn truffle init`
 
