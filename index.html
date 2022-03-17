@@ -43,6 +43,8 @@
                 <textarea id="wallet_info" class="form-control" rows="8"></textarea>
             </div>
         </form>
+        <!--
+        -->
         <section class="">
             <h4>
                 Send transaction:
@@ -63,6 +65,7 @@
             <button class="sendEthButton btn btn-secondary">Send Eth</button>
 
         </section>
+
         <section class="crear_dron">
             <h4>
                 Crear Dron:
@@ -71,7 +74,7 @@
                 <div class="mb-3">
                     <label for="select_empresa" class="form-label">Empresa</label>
                     <!-- INPUT ADDRESS -->
-                    <input type="nutextmber" class="form-control" id="empresa" value="0x4B87e2d65FaCF3e16Aa99a6704aa99c666539a56">
+                    <input type="nutextmber" class="form-control" id="CreateDronEmpresa" value="0x4B87e2d65FaCF3e16Aa99a6704aa99c666539a56">
                 </div>
                 <div class="mb-3">
                     <label for="altura_minima" class="form-label">Altura Mínima</label>
@@ -80,10 +83,6 @@
                 <div class="mb-3">
                     <label for="altura_maxima" class="form-label">Altura Máxima</label>
                     <input type="number" class="form-control" id="altura_maxima">
-                </div>
-                <div class="mb-3">
-                    <label for="coste" class="form-label">Coste</label>
-                    <input type="number" class="form-control" id="coste">
                 </div>
                 <div class="mb-3">
                     <label for="coste" class="form-label">Pesticidas</label>
@@ -118,8 +117,12 @@
                         </label>
                     </div>
                 </div>
+                <div class="mb-3">
+                    <label for="coste" class="form-label">Coste</label>
+                    <input type="number" class="form-control" id="coste">
+                </div>
             </form>
-            <button class="sendCreateDron btn btn-secondary">Crear Dron</button>
+            <button class="sendCreateDron btn btn-secondary" form="form_crear_dron" contract="Dron" method="CrearDron">Crear Dron</button>
         </section>
         <section class="crear_dron">
             <h4>
@@ -127,11 +130,6 @@
             </h4>
             <form action="" id="form_crear_parcela">
                 <div class="mb-3">
-                    <label for="select_propietario" class="form-label">Propietario</label>
-                    <!-- INPUT ADDRESS -->
-                    <input type="nutextmber" class="form-control" id="propietario" value="0x4B87e2d65FaCF3e16Aa99a6704aa99c666539a56">
-                </div>
-                <div class="mb-3">
                     <label for="altura_minima" class="form-label">Altura Mínima</label>
                     <input type="number" class="form-control" id="altura_minima">
                 </div>
@@ -141,39 +139,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="coste" class="form-label">Pesticidas</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_A" id="pesticida_a">
-                        <label class="form-check-label" for="pesticida_a">
-                            Pesticida A
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_B" id="pesticida_b">
-                        <label class="form-check-label" for="pesticida_b">
-                            Pesticida B
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_C" id="pesticida_c">
-                        <label class="form-check-label" for="pesticida_c">
-                            Pesticida C
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_D" id="pesticida_d">
-                        <label class="form-check-label" for="pesticida_d">
-                            Pesticida D
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_E" id="pesticida_e">
-                        <label class="form-check-label" for="pesticida_e">
-                            Pesticida E
-                        </label>
-                    </div>
+                    <select class="form-select" id="perticida" aria-label="Seleccionar Pesticida">
+                        <option selected>Seleccionar Pesticida</option>
+                        <option value="1">Pesticida A</option>
+                        <option value="2">Pesticida B</option>
+                        <option value="3">Pesticida C</option>
+                    </select>
                 </div>
             </form>
-            <button class="sendCreateParcela btn btn-secondary">Crear Parcela</button>
+            <button class="sendCreateParcela btn btn-secondary" form="form_crear_parcela" contract="Parcela" method="CrearParcela">Crear Parcela</button>
         </section>
         <section class="crear_fumigacion">
             <h4>
@@ -199,7 +173,7 @@
                     </select>
                 </div>
             </form>
-            <button class="sendCreateFumigacion btn btn-secondary">Crear Fumigación</button>
+            <button class="sendCreateFumigacion btn btn-secondary" form="form_crear_fumigacion" contract="Fumigacion" method="SolicitarFumigacion">Crear Fumigación</button>
             <div id="respuesta_fumigacion" class="mt-3">
                 Pagar con ID de respuesta de la creación
             </div>

@@ -9,6 +9,36 @@ const walletInfo     = document.querySelector('#wallet_info');
 const sendEthButton  = document.querySelector('.sendEthButton');
 const inputAmount    = document.querySelector('input#amount');
 const inputWalletTo  = document.querySelector('input#wallet_to');
+const buttons  = document.querySelectorAll('button');
+
+// Listener de botones
+buttons.forEach(button => {
+
+    button.addEventListener('click', async (event) => {
+
+        event.preventDefault()
+
+        let method   = button.getAttribute('method') || null;
+        let form     = button.getAttribute('form') || null;
+        let contract = button.getAttribute('contract') || null;
+        let inputs   = document.querySelectorAll('#'+form+' input');
+
+        if(inputs && form && contract)
+        {
+
+            let params = [];
+            inputs.forEach(input => {
+                params.push(input.value);
+            });
+
+            console.log('addEventListener - ', contract, method, params);  
+            await sendMethod(contract, method, params);
+
+        }
+
+    });
+
+})
 
 import ParcelaAbi from './abis/ParcelaContract.js';
 import DronAbi from './abis/DronContract.js';
@@ -18,7 +48,7 @@ import FumigacionAbi from './abis/FumigacionContract.js';
 const abis = {
 
     Parcela : ParcelaAbi,
-    Dron : ParcelaAbi,
+    Dron : DronAbi,
     FumiToken : FumiTokenAbi,
     Fumigacion : FumigacionAbi
 };
@@ -59,9 +89,11 @@ async function initMetamask(){
             setWalletInfo();
         });
 
-        sendMethod('FumiToken','decimals');
+        await sendMethod('FumiToken','decimals');
+        await sendMethod('Parcela','CrearParcela', [1,2,'Pesticida_A']); //(int256 MIN, int256 MAX, _Pesticidas PESTICIDA)
+        await sendMethod('Parcela','ObtenerInfoParcela', 1);
 
-        console.log('ethers', ethers);
+        //console.log('ethers', ethers);
 
         return true;
     }
@@ -118,22 +150,32 @@ sendEthButton.addEventListener('click', () => {
         .catch((error) => console.error);
 });
 
+
 async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = null){ 
 
-    console.log("sendMethod() - datos - ", contrato, metodo, params);
-    console.log("sendMethod() - ABI - ", abis[contrato].abi);
+    console.log("---------");
+    console.log("sendMethod() "+contrato+"."+metodo+"(params) - (contrato, metodo, params): ", contrato, metodo, params);
 
-    const ethersProvider = new ethers.providers.Web3Provider(provider);
-    const signer = await ethersProvider.getSigner(account);
-    //value.from, ethers.utils.isAddress(value.from),
+    try {
+        //console.log("sendMethod() - ABI - ", abis[contrato].abi);
+    
+        const ethersProvider = new ethers.providers.Web3Provider(provider);
+        const signer = await ethersProvider.getSigner(account);
+        //value.from, ethers.utils.isAddress(value.from),
+    
+        const Contract = new ethers.Contract(addresses[contrato], abis[contrato].abi, signer);
+        //console.log("sendMethod() - contrato: ",Contract);
+        const respuesta = await Contract[metodo](1 ,2 ,4 , 'lo que sea');
+        console.log("sendMethod() - Contract."+metodo+"(): ",respuesta);
+    
+        return respuesta;
 
-    const Contract = new ethers.Contract(addresses[contrato], abis[contrato].abi, signer);
-    console.log("sendMethod() - contrato: ",Contract);
+    } catch (error) {
 
-    const respuesta = await Contract[metodo](params);
-    console.log("sendMethod() - transaccion: ",respuesta);
+        console.error("sendMethod() - error: ",error);
+        return error;
 
-    return respuesta;
+    }
 }
   
 
