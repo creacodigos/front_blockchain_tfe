@@ -49,18 +49,28 @@ buttons.forEach(button => {
         let method   = button.getAttribute('method') || null;
         let form     = button.getAttribute('form') || null;
         let contract = button.getAttribute('contract') || null;
-        let inputs   = document.querySelectorAll('#'+form+' input');
+        let inputs   = document.querySelectorAll('form.'+form+' input, form.'+form+' select');
+        let pre      = document.querySelector('pre.'+form);
 
         if(inputs && form && contract)
         {
 
             let params = [];
             inputs.forEach(input => {
+
+                if(
+                    input?.type == 'text' && input?.value != '' || 
+                    (input?.type == 'checkbox' && input?.checked) || 
+                    (input?.type != 'checkbox' && input?.type != 'text' && input?.value)
+                )
                 params.push(input.value);
+
             });
 
             console.log('addEventListener - ', contract, method, params);  
-            await sendMethod(contract, method, params);
+            let respuesta = await sendMethod(contract, method, params);
+            if(pre && respuesta)
+                pre.innerHTML = JSON.stringify(respuesta, undefined, 2)
 
         }
 
@@ -138,7 +148,7 @@ async function initMetamask(){
         {       }
             //await sendMethod('FumiToken','decimals');
             //await sendMethod('Parcela','CrearParcela', [1,2, 2]);
-            await sendMethod('Parcela','ObtenerInfoParcela', [1]); //(int256 MIN, int256 MAX, _Pesticidas PESTICIDA)
+            //await sendMethod('Parcela','ObtenerInfoParcela', [1]); //(int256 MIN, int256 MAX, _Pesticidas PESTICIDA)
             //await sendMethod('Parcela','ObtenerInfoParcela', 1);
  
 
