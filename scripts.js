@@ -11,6 +11,34 @@ const inputAmount    = document.querySelector('input#amount');
 const inputWalletTo  = document.querySelector('input#wallet_to');
 const buttons  = document.querySelectorAll('button');
 
+import ParcelaAbi from './abis/ParcelaContract.js';
+import DronAbi from './abis/DronContract.js';
+import FumiTokenAbi from './abis/FumiTokenContract.js';
+import FumigacionAbi from './abis/FumigacionContract.js';
+
+const abis = {
+
+    Parcela : ParcelaAbi,
+    Dron : DronAbi,
+    FumiToken : FumiTokenAbi,
+    Fumigacion : FumigacionAbi
+};
+
+const addresses = {
+    Parcela : '0xe64788a775D68D0F9D8ea3cb20C4e671dc441Ada',
+    Dron : '0x78c824397dE1c0C66519d498D9A0329d1ac85457',
+    FumiToken : '0x57B33D4aEA134e568c147EbfCfB286ae6BbA0a53',
+    Fumigacion : '0x35f0A7C227DEB8B0dFef7d27F0f1Bd30787d34ed'
+}
+
+const _Pesticidas = {
+    Pesticida_A: 0,
+    Pesticida_B: 1,
+    Pesticida_C: 2,
+    Pesticida_D: 3,
+    Pesticida_E: 4
+}
+
 // Listener de botones
 buttons.forEach(button => {
 
@@ -40,25 +68,42 @@ buttons.forEach(button => {
 
 })
 
-import ParcelaAbi from './abis/ParcelaContract.js';
-import DronAbi from './abis/DronContract.js';
-import FumiTokenAbi from './abis/FumiTokenContract.js';
-import FumigacionAbi from './abis/FumigacionContract.js';
+// Listener de botones
+ethereumButton.addEventListener('click', () => {
+    getAccount();
+});
+/*
+//Sending Ethereum to an address
+sendEthButton.addEventListener('click', () => {
 
-const abis = {
+    if(!account)
+    {
+        //window.alert('No hay cuentas');
+        getAccount();
+    }
+    console.log('inputWalletTo.value',inputWalletTo.value);
+    console.log('inputAmount.value',inputAmount.value);
 
-    Parcela : ParcelaAbi,
-    Dron : DronAbi,
-    FumiToken : FumiTokenAbi,
-    Fumigacion : FumigacionAbi
-};
+    let params = {
+                    from: ethereum.selectedAddress,
+                    to: inputWalletTo.value,
+                    value: '0x00',
+                    gasPrice: '0x09184e72a000',
+                    gas: '0x2710',
+                };
+    console.table(params);
 
-const addresses = {
-    Parcela : '0xe64788a775D68D0F9D8ea3cb20C4e671dc441Ada',
-    Dron : '0x78c824397dE1c0C66519d498D9A0329d1ac85457',
-    FumiToken : '0x57B33D4aEA134e568c147EbfCfB286ae6BbA0a53',
-    Fumigacion : '0x35f0A7C227DEB8B0dFef7d27F0f1Bd30787d34ed'
-}
+    ethereum
+        .request({
+        method: 'eth_sendTransaction',
+        params: [ params ],
+
+        })
+        .then((txHash) => console.log(txHash))
+        .catch((error) => console.error);
+});
+*/
+
 
 // Función que verifica si es Metamask
 function isMetamask (){
@@ -89,9 +134,13 @@ async function initMetamask(){
             setWalletInfo();
         });
 
-        await sendMethod('FumiToken','decimals');
-        await sendMethod('Parcela','CrearParcela', [1,2,'Pesticida_A']); //(int256 MIN, int256 MAX, _Pesticidas PESTICIDA)
-        await sendMethod('Parcela','ObtenerInfoParcela', 1);
+        if(account)
+        {       }
+            //await sendMethod('FumiToken','decimals');
+            //await sendMethod('Parcela','CrearParcela', [1,2, 2]);
+            await sendMethod('Parcela','ObtenerInfoParcela', [1]); //(int256 MIN, int256 MAX, _Pesticidas PESTICIDA)
+            //await sendMethod('Parcela','ObtenerInfoParcela', 1);
+ 
 
         //console.log('ethers', ethers);
 
@@ -107,10 +156,7 @@ function setWalletInfo(){
 
 }
 
-// Listener de botones
-ethereumButton.addEventListener('click', () => {
-    getAccount();
-});
+
 
 // Función que obtiene la cuenta:
 async function getAccount() {
@@ -120,38 +166,8 @@ async function getAccount() {
     setWalletInfo();
 }
 
-//Sending Ethereum to an address
-sendEthButton.addEventListener('click', () => {
 
-    if(!account)
-    {
-        //window.alert('No hay cuentas');
-        getAccount();
-    }
-    console.log('inputWalletTo.value',inputWalletTo.value);
-    console.log('inputAmount.value',inputAmount.value);
-
-    let params = {
-                    from: ethereum.selectedAddress,
-                    to: inputWalletTo.value,
-                    value: '0x00',
-                    gasPrice: '0x09184e72a000',
-                    gas: '0x2710',
-                };
-    console.table(params);
-
-    ethereum
-        .request({
-        method: 'eth_sendTransaction',
-        params: [ params ],
-
-        })
-        .then((txHash) => console.log(txHash))
-        .catch((error) => console.error);
-});
-
-
-async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = null){ 
+async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = ''){ 
 
     console.log("---------");
     console.log("sendMethod() "+contrato+"."+metodo+"(params) - (contrato, metodo, params): ", contrato, metodo, params);
@@ -165,8 +181,18 @@ async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = 
     
         const Contract = new ethers.Contract(addresses[contrato], abis[contrato].abi, signer);
         //console.log("sendMethod() - contrato: ",Contract);
-        const respuesta = await Contract[metodo](1 ,2 ,4 , 'lo que sea');
+        const respuesta = await Contract[metodo](...params); //1 ,2 ,4 , 'lo que sea'
         console.log("sendMethod() - Contract."+metodo+"(): ",respuesta);
+
+        let format = {
+            _ID: respuesta._ID.toString(),
+            _Altitud_MIN: respuesta._Altitud_MIN.toString(),
+            _Altitud_MAX: respuesta._Altitud_MAX.toString(),
+            _Pesticida: respuesta._Pesticida.toString(),
+            _Owner: respuesta._Owner
+        }
+        console.table(format);
+        console.table(respuesta);
     
         return respuesta;
 
