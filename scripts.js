@@ -7,6 +7,7 @@ const ethereumButton      = document.querySelector('.enableEthereumButton');
 const showAccount         = document.querySelector('#showAccount');
 const showAccount_balance = document.querySelector('#showAccount_balance');
 const walletInfo          = document.querySelector('#wallet_info');
+const contratcsInfo      = document.querySelector('#contratcs_info');
 const buttons             = document.querySelectorAll('button');
 
 import ParcelaAbi from './abis/ParcelaContract.js';
@@ -126,6 +127,8 @@ sendEthButton.addEventListener('click', () => {
 function isMetamask (){
     
     if (typeof window.ethereum !== 'undefined') {
+
+        contratcsInfo.value = JSON.stringify(addresses, null, 2);
         return true;
     }
     return false;
