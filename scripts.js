@@ -7,9 +7,6 @@ const ethereumButton      = document.querySelector('.enableEthereumButton');
 const showAccount         = document.querySelector('#showAccount');
 const showAccount_balance = document.querySelector('#showAccount_balance');
 const walletInfo          = document.querySelector('#wallet_info');
-const sendEthButton       = document.querySelector('.sendEthButton');
-const inputAmount         = document.querySelector('input#amount');
-const inputWalletTo       = document.querySelector('input#wallet_to');
 const buttons             = document.querySelectorAll('button');
 
 import ParcelaAbi from './abis/ParcelaContract.js';
