@@ -24,8 +24,8 @@ contract DronContract is ERC721 {
         address _Empresa; 
         int256 _Altitud_MIN;
         int256 _Altitud_MAX;
-        _Pesticidas[] _Pesticidas;
         uint256 _Coste;
+        _Pesticidas[] _Pesticidas;
     }
 
     mapping(uint256 => Dron) private _Drones;
@@ -58,17 +58,17 @@ contract DronContract is ERC721 {
         _;
     }
 
-    function CrearDron(address EMPRESA, int256 MIN, int256 MAX, _Pesticidas[] calldata PESTICIDA, uint256 COSTE) public returns (uint256){
+    function CrearDron(address EMPRESA, int256 MIN, int256 MAX, uint256 COSTE, _Pesticidas[] calldata PESTICIDA) public returns (uint256){
         UltimoID.increment();
         uint256 IDActual = UltimoID.current();
-
+        _safeMint(msg.sender,IDActual);
         Dron memory Dron_ = Dron({
             _ID: IDActual,
             _Empresa: EMPRESA,
             _Altitud_MIN: MIN,
             _Altitud_MAX: MAX,
-            _Pesticidas: PESTICIDA,
-            _Coste: COSTE
+            _Coste: COSTE,
+            _Pesticidas: PESTICIDA            
         });
 
         _Drones[IDActual] = Dron_;
@@ -98,20 +98,20 @@ contract DronContract is ERC721 {
         return true;
     }
 
-    function BuscarPesticida(uint256 ID, _Pesticidas PESTICIDA) public view returns (uint)
+    function BuscarPesticida(uint256 ID, _Pesticidas PESTICIDA) public view returns (int)
     {
-        for (uint i = 1; i <= _Drones[ID]._Pesticidas.length; i++) {
-            if (_Drones[ID]._Pesticidas[i--] == PESTICIDA) {
+        for (int i = 0; i < int(_Drones[ID]._Pesticidas.length); i++) {
+            if (_Drones[ID]._Pesticidas[uint(i)] == PESTICIDA) {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
     function AltaPesticida(uint256 ID, _Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool)
     {
-        uint key = BuscarPesticida(ID, PESTICIDA);
-        if (key > 0) {
+        int key = BuscarPesticida(ID, PESTICIDA);
+        if (key >= 0) {
             return true;
         } else {
             _Drones[ID]._Pesticidas.push(PESTICIDA);
@@ -125,14 +125,14 @@ contract DronContract is ERC721 {
         _Drones[ID]._Pesticidas.pop();
     }
 
-    function BajaPesticida(uint256 ID, _Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool)
+    function BajaPesticida(uint256 ID, _Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (int)
     {
-        uint key = BuscarPesticida(ID, PESTICIDA);
-        if (key > 0) {
-            _QuitarPosicionArray(ID, key--);
-            return true;
+        int key = BuscarPesticida(ID, PESTICIDA);
+        if (key >= 0) {
+            _QuitarPosicionArray(ID, uint(key));
+            return key;
         } else {
-            return true;
+            return key;
         }
     }
 
@@ -159,8 +159,8 @@ contract DronContract is ERC721 {
 
     function ComprobarPesticida(uint256 ID, _Pesticidas PESTICIDA) public view returns (bool)
     {
-        uint key = BuscarPesticida(ID, PESTICIDA);
-        if (key > 0) {
+        int key = BuscarPesticida(ID, PESTICIDA);
+        if (key >= 0) {
             return true;
         } else {
             return false;

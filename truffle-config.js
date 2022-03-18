@@ -24,7 +24,7 @@
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 const PrivateKeyProvider = require("truffle-privatekey-provider");
-const privKeyrinkeby = process.env.PRIVATE_KEY;
+const privKeyrinkeby = '0x1fc04630503f6da427d0a21286fd62065990b64a3cd79a37e0c6a2ca2d6d1353'; //process.env.PRIVATE_KEY;
 
 module.exports = {
   /**
@@ -45,8 +45,9 @@ module.exports = {
     // options below to some value.
     //
     development: {
+    provider: () => new PrivateKeyProvider(privKeyrinkeby, "http://127.0.0.1:8545/"),
      host: "127.0.0.1",     // Localhost (default: none)
-     port: 9545,            // Standard Ethereum port (default: none)
+     port: 8545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
     // Another network with more advanced options...
@@ -62,7 +63,7 @@ module.exports = {
     // NB: It's important to wrap the provider as a function.
 
     rinkeby: {
-      provider: () => new PrivateKeyProvider(privKeyrinkeby, "https://rinkeby.infura.io/v3/" + process.env.INFURA_KEY),
+      provider: () => new PrivateKeyProvider(privKeyrinkeby, "https://rinkeby.infura.io/v3/fdcc1399cd5d4ee78412094f19b80fd3"), //process.env.INFURA_KEY),
       network_id: 4,       // Ropsten's id
       gas: 5500000,        // Ropsten has a lower block limit than mainnet
       confirmations: 0,    // # of confs to wait between deployments. (default: 0)

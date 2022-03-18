@@ -29,6 +29,8 @@ contract ParcelaContract is ERC721 {
 
     mapping(uint256 => Parcela) private _Parcelas;
 
+    Parcela[] PARCELAS;
+
     constructor() ERC721("MyParcela", "MParcela") {
         
         UltimoID.increment();
@@ -54,6 +56,7 @@ contract ParcelaContract is ERC721 {
     function CrearParcela(int256 MIN, int256 MAX, _Pesticidas PESTICIDA) public returns (uint256){
         UltimoID.increment();
         uint256 IDActual = UltimoID.current();
+        _safeMint(msg.sender,IDActual);
 
         Parcela memory Parcela_ = Parcela({
             _ID: IDActual,
@@ -64,6 +67,7 @@ contract ParcelaContract is ERC721 {
         });
 
         _Parcelas[IDActual] = Parcela_;
+        PARCELAS.push(Parcela_);
 
         return IDActual;
     }
@@ -85,6 +89,10 @@ contract ParcelaContract is ERC721 {
 
     function ObtenerInfoParcela(uint256 ID) public view returns (Parcela memory) {
         return _Parcelas[ID];
+    }
+
+    function ObtenerInfoParcelas() public view returns (Parcela [] memory) {
+        return PARCELAS;
     }
 
     function ComprobarAltitud(uint256 ID, int256 MIN, int256 MAX) public view returns (bool)

@@ -8,8 +8,8 @@ import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-import "./Dron.sol";
-import "./Parcela.sol";
+import "./DronContract.sol";
+import "./ParcelaContract.sol";
 
 //Extendemos del contrato ERC721 (Contrato destinado a Tokens no fungibles)
 contract FumigacionContract is Ownable {
@@ -84,5 +84,9 @@ contract FumigacionContract is Ownable {
         if (_FumiToken.transferFrom(Parcela_._Owner, Dron_._Empresa, Dron_._Coste)) {
             _Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._Pagada = true;
         }
+    }
+
+    function ObtenerInfoFumigacion(uint256 ID) public view returns (Solicitud_Fumigacion memory) {
+        return _Solicitudes_Fumigacion[ID];
     }
 }

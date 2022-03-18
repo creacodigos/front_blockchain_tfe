@@ -73,6 +73,18 @@ Ejecutamos una prueba de la red en local:
 
 `yarn truffle develop (prueba local)`
 
+Probar con el nodo local requiere instalar `ganache-cli` con:
+
+`yarn add ganache-cli`
+
+Agrego balance a la cuenta definida:
+
+`yarn ganache-cli --account="<PRIVATE_KEY>,<BALANCE>"`
+
+Lanzamos el migrate en la red local:
+
+`yarn truffle migrate`
+
 Ejecutamos la compilación el despliegue de contratos en local (simula lo que haría en real): 
 
 `yarn truffle migrate (Compila y despliega contratos)`

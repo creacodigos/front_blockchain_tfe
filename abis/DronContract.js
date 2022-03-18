@@ -362,14 +362,14 @@ export default {
           "type": "int256"
         },
         {
-          "internalType": "enum DronContract._Pesticidas[]",
-          "name": "PESTICIDA",
-          "type": "uint8[]"
-        },
-        {
           "internalType": "uint256",
           "name": "COSTE",
           "type": "uint256"
+        },
+        {
+          "internalType": "enum DronContract._Pesticidas[]",
+          "name": "PESTICIDA",
+          "type": "uint8[]"
         }
       ],
       "name": "CrearDron",
@@ -481,9 +481,9 @@ export default {
       "name": "BuscarPesticida",
       "outputs": [
         {
-          "internalType": "uint256",
+          "internalType": "int256",
           "name": "",
-          "type": "uint256"
+          "type": "int256"
         }
       ],
       "stateMutability": "view",
@@ -530,9 +530,9 @@ export default {
       "name": "BajaPesticida",
       "outputs": [
         {
-          "internalType": "bool",
+          "internalType": "int256",
           "name": "",
-          "type": "bool"
+          "type": "int256"
         }
       ],
       "stateMutability": "nonpayable",
@@ -571,14 +571,14 @@ export default {
               "type": "int256"
             },
             {
-              "internalType": "enum DronContract._Pesticidas[]",
-              "name": "_Pesticidas",
-              "type": "uint8[]"
-            },
-            {
               "internalType": "uint256",
               "name": "_Coste",
               "type": "uint256"
+            },
+            {
+              "internalType": "enum DronContract._Pesticidas[]",
+              "name": "_Pesticidas",
+              "type": "uint8[]"
             }
           ],
           "internalType": "struct DronContract.Dron",

@@ -66,11 +66,11 @@
 <body>
     <section class="container my-5">
 
-        <button class="btn btn-primary enableEthereumButton">Enable Ethereum</button>
+        <button class="btn btn-primary enableEthereumButton">Conectar con Metamask</button>
         <form action="">
 
             <div class="mb-3">
-                <label for="showAccount" class="form-label text-bold"><strong>Connected Account</strong></label>
+                <label for="showAccount" class="form-label text-bold"><strong>Cuenta conectada con Metamask</strong></label>
                 <input type="text" class="form-control" id="showAccount" readonly >
             </div>
             <div class="mb-3">
@@ -235,7 +235,7 @@
             <h4>
                 Dron Buscar Pesticida:
             </h4>
-            <form action="" class="form_dron_congifurar_coste">
+            <form action="" class="form_dron_buscar_persticida">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
                     <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
@@ -254,36 +254,14 @@
                     <option value="5">Pesticida E</option>
                 </select>
             </form>
-            <button class="btn btn-secondary" form="form_dron_congifurar_coste" contract="Dron" method="BuscarPesticida">Buscar Pesticida</button>
-            <pre class="form_dron_congifurar_coste"></pre>
+            <button class="btn btn-secondary" form="form_dron_buscar_persticida" contract="Dron" method="BuscarPesticida">Buscar Pesticida</button>
+            <pre class="form_dron_buscar_persticida"></pre>
         </section>
         <section class="dron">
             <h4>
                 Dron Alta Pesticida:
             </h4>
-            <form action="" class="form_dron_congifurar_coste">
-                <div class="mb-3">
-                    <label for="select_dron" class="form-label">Dron</label>
-                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
-                        <option selected>Seleccionar Dron</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="desticida" class="form-label">Pesticida</label>
-                    <input type="text" class="form-control" id="pesticida" value="Pesticida_N">
-                </div>
-            </form>
-            <button class="btn btn-secondary" form="form_dron_congifurar_coste" contract="Dron" method="AltaPesticida">Alta Pesticida</button>
-            <pre class="form_dron_congifurar_coste"></pre>
-        </section>
-        <section class="dron">
-            <h4>
-                Dron Baja Pesticida:
-            </h4>
-            <form action="" class="form_dron_configurar_pesticida">
+            <form action="" class="form_dron_alta_pesticida">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
                     <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
@@ -305,8 +283,37 @@
                     </select>
                 </div>
             </form>
-            <button class="btn btn-secondary" form="form_dron_configurar_pesticida" contract="Dron" method="BajaPesticida">Baja Pesticida</button>
-            <pre class="form_dron_configurar_pesticida"></pre>
+            <button class="btn btn-secondary" form="form_dron_alta_pesticida" contract="Dron" method="AltaPesticida">Alta Pesticida</button>
+            <pre class="form_dron_alta_pesticida"></pre>
+        </section>
+        <section class="dron">
+            <h4>
+                Dron Baja Pesticida:
+            </h4>
+            <form action="" class="form_dron_baja_pesticida">
+                <div class="mb-3">
+                    <label for="select_dron" class="form-label">Dron</label>
+                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
+                        <option selected>Seleccionar Dron</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="desticida" class="form-label">Pesticida</label>
+                    <select class="form-select" id="perticida" aria-label="Seleccionar Pesticida">
+                        <option selected>Seleccionar Pesticida</option>
+                        <option value="1">Pesticida A</option>
+                        <option value="2">Pesticida B</option>
+                        <option value="3">Pesticida C</option>
+                        <option value="4">Pesticida D</option>
+                        <option value="5">Pesticida E</option>
+                    </select>
+                </div>
+            </form>
+            <button class="btn btn-secondary" form="form_dron_baja_pesticida" contract="Dron" method="BajaPesticida">Baja Pesticida</button>
+            <pre class="form_dron_baja_pesticida"></pre>
         </section>
         <section class="dron">
             <h4>
@@ -329,8 +336,8 @@
             <h4>
                 Dron Obtener Info Drones:
             </h4>
-            <button class="btn btn-secondary" form="form_dron_obtener_dron" contract="Dron" method="ObtenerInfoDrones">Obtener Info Drones</button>
-            <pre class="form_dron_obtener_dron"></pre>
+            <button class="btn btn-secondary" form="form_dron_obtener_drones" contract="Dron" method="ObtenerInfoDrones">Obtener Info Drones</button>
+            <pre class="form_dron_obtener_drones"></pre>
         </section>
 
 <!-- PARCELA -->
@@ -438,17 +445,6 @@
             <h4>
                 Parcelas Obtener Todas:
             </h4>
-            <form action="" class="form_parcela_info_parcelas">
-                <div class="mb-3">
-                    <label for="select_parcela" class="form-label">Parcela</label>
-                    <select class="form-select" id="select_parcela" aria-label="Seleccionar Parcela">
-                        <option selected>Seleccionar Parcela</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </form>
             <button class="btn btn-secondary" form="form_parcela_info_parcelas" contract="Parcela" method="ObtenerInfoParcelas">Obtener Todas Parcelas</button>
             <pre class="form_parcela_info_parcelas"></pre>
         </section>
@@ -521,10 +517,56 @@
             <pre class="form_realizar_fumigacion"></pre>
         </section>
 
+        <section class="fumigacion">
+            <h4>
+                Fumigación Obtener Info:
+            </h4>
+            <form action="" class="form_fumigacion_info_fumigacion">
+                <div class="mb-3">
+                    <label for="select_fumigacion" class="form-label">Fumigacion</label>
+                    <select class="form-select" id="select_fumigacion" aria-label="Seleccionar Fumigacion">
+                        <option selected>Seleccionar Fumigacion</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </form>
+            <button class="btn btn-secondary" form="form_fumigacion_info_fumigacion" contract="Fumigacion" method="ObtenerInfoFumigacion">Obtener Info Fumigacion</button>
+            <pre class="form_fumigacion_info_fumigacion"></pre>
+        </section>
+        <section class="fumigacion">
+            <h4>
+                Fumigacion Obtener Todas:
+            </h4>
+            <button class="btn btn-secondary" form="form_fumigacion_info_fumigacions" contract="Parcela" method="ObtenerInfoFumigaciones">Obtener Todas Fumigacion</button>
+            <pre class="form_fumigacion_info_fumigacions"></pre>
+        </section>
+
         <!-- FumiToken -->
         <section class="fumitoken">
-            <button class="btn btn-secondary" form="form_balance_fumitoken" contract="FumiToken" method="BalanceOf">Obtener Balance</button>
+            <form action="" class="form_balance_fumitoken">
+            <div class="mb-3">
+                <label for="showAccount" class="form-label text-bold"><strong>Cuenta conectada con Metamask</strong></label>
+                <input type="text" class="form-control" id="showAccount_balance" >
+            </div>
+            </form>
+            <button class="btn btn-secondary" form="form_balance_fumitoken" contract="FumiToken" method="balanceOf">Obtener Balance</button>
             <pre class="form_balance_fumitoken"></pre>
+        </section>
+        <section class="fumitoken">
+            <form action="" class="form_mint_fumitoken">
+                <div class="mb-3">
+                    <label for="showAccount" class="form-label text-bold"><strong>Cuenta conectada con Metamask</strong></label>
+                    <input type="text" class="form-control" id="showAccount_mint" >
+                </div>
+                <div class="mb-3">
+                    <label for="amount" class="form-label">Cantidad</label>
+                    <input type="number" class="form-control" id="amount" value="1" >
+                </div>
+            </form>
+            <button class="btn btn-secondary" form="form_mint_fumitoken" contract="FumiToken" method="mint">Mintar Fumitokens</button>
+            <pre class="form_mint_fumitoken"></pre>
         </section>
     </section>
 

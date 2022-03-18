@@ -3,13 +3,14 @@ let accounts = [];
 let account  = null;
 let provider = null;
 
-const ethereumButton = document.querySelector('.enableEthereumButton');
-const showAccount    = document.querySelector('#showAccount');
-const walletInfo     = document.querySelector('#wallet_info');
-const sendEthButton  = document.querySelector('.sendEthButton');
-const inputAmount    = document.querySelector('input#amount');
-const inputWalletTo  = document.querySelector('input#wallet_to');
-const buttons  = document.querySelectorAll('button');
+const ethereumButton      = document.querySelector('.enableEthereumButton');
+const showAccount         = document.querySelector('#showAccount');
+const showAccount_balance = document.querySelector('#showAccount_balance');
+const walletInfo          = document.querySelector('#wallet_info');
+const sendEthButton       = document.querySelector('.sendEthButton');
+const inputAmount         = document.querySelector('input#amount');
+const inputWalletTo       = document.querySelector('input#wallet_to');
+const buttons             = document.querySelectorAll('button');
 
 import ParcelaAbi from './abis/ParcelaContract.js';
 import DronAbi from './abis/DronContract.js';
@@ -25,10 +26,10 @@ const abis = {
 };
 
 const addresses = {
-    Parcela : '0xe64788a775D68D0F9D8ea3cb20C4e671dc441Ada',
-    Dron : '0x78c824397dE1c0C66519d498D9A0329d1ac85457',
-    FumiToken : '0x57B33D4aEA134e568c147EbfCfB286ae6BbA0a53',
-    Fumigacion : '0x35f0A7C227DEB8B0dFef7d27F0f1Bd30787d34ed'
+    Parcela : '0xb355A6AbB57D9104EE3fDbE50fA0e867CDc6a5ed',
+    Dron : '0x6e4b29191529442aFe31D2851636De397C7eb102',
+    FumiToken : '0xde09F0534Dae297cC3a2E6a5fE6858C22f87F69c',
+    Fumigacion : '0x5bBcbf5B4dB48B700Fe20C5548a4fA0Cf8c37B6b'
 }
 
 const _Pesticidas = {
@@ -55,7 +56,10 @@ buttons.forEach(button => {
         if(inputs && form && contract)
         {
 
+            console.log(inputs);
+
             let params = [];
+            let checkbox = [];
             inputs.forEach(input => {
 
                 if(
@@ -63,9 +67,15 @@ buttons.forEach(button => {
                     (input?.type == 'checkbox' && input?.checked) || 
                     (input?.type != 'checkbox' && input?.type != 'text' && input?.value)
                 )
-                params.push(input.value);
+                if(input?.type == 'checkbox' && input?.checked)
+                    checkbox.push(parseInt(input.value));
+                else // if(input?.value && (input.))
+                    params.push(input.value);
 
             });
+
+            if(checkbox?.length > 0)
+                params.push(checkbox);
 
             console.log('addEventListener - ', contract, method, params);  
             let respuesta = await sendMethod(contract, method, params);
@@ -141,6 +151,7 @@ async function initMetamask(){
             accounts = _accounts
             account  = accounts[0];
             showAccount.value = account;
+            showAccount_balance.value = account;
             setWalletInfo();
         });
 
@@ -163,6 +174,8 @@ async function initMetamask(){
 function setWalletInfo(){
 
     walletInfo.value = JSON.stringify({...ethereum._state, chainId: ethereum.chainId}, null, 2);
+    showAccount.value = ethereum?._state?.accounts[0] || null;
+    showAccount_balance.value = ethereum?._state?.accounts[0] || null;
 
 }
 
@@ -173,6 +186,7 @@ async function getAccount() {
     accounts = await ethereum.request({ method: 'eth_requestAccounts' });
     account = accounts[0];
     showAccount.value = account;
+    showAccount_balance.value = account;
     setWalletInfo();
 }
 
@@ -191,17 +205,103 @@ async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = 
     
         const Contract = new ethers.Contract(addresses[contrato], abis[contrato].abi, signer);
         //console.log("sendMethod() - contrato: ",Contract);
-        const respuesta = await Contract[metodo](...params); //1 ,2 ,4 , 'lo que sea'
+        let respuesta = await Contract[metodo](...params); //1 ,2 ,4 , 'lo que sea'
         console.log("sendMethod() - Contract."+metodo+"(): ",respuesta);
 
-        let format = {
-            _ID: respuesta._ID.toString(),
-            _Altitud_MIN: respuesta._Altitud_MIN.toString(),
-            _Altitud_MAX: respuesta._Altitud_MAX.toString(),
-            _Pesticida: respuesta._Pesticida.toString(),
-            _Owner: respuesta._Owner
+        if(metodo == 'ObtenerInfoDron')
+        {
+
+            let format = {
+                _ID: respuesta._ID?.toString(),
+                _Empresa: respuesta._Empresa,
+                _Altitud_MIN: respuesta._Altitud_MIN?.toString(),
+                _Altitud_MAX: respuesta._Altitud_MAX?.toString(),
+                _Coste: respuesta._Coste?.toString(),
+                _Pesticidas: respuesta?._Pesticidas?.toString()
+            }
+            respuesta = format;
+
         }
-        console.table(format);
+        else if(metodo == 'ObtenerInfoDrones')
+        {
+            let format = [];
+            respuesta.forEach((dron) => {
+
+                format.push({
+                    _ID: dron._ID?.toString(),
+                    _Empresa: dron._Empresa,
+                    _Altitud_MIN: dron._Altitud_MIN?.toString(),
+                    _Altitud_MAX: dron._Altitud_MAX?.toString(),
+                    _Coste: dron._Coste?.toString(),
+                    _Pesticidas: dron?._Pesticidas?.toString()
+                });
+
+            })
+            respuesta = format;
+
+        }
+        else if(metodo == 'ObtenerInfoParcela')
+        {
+
+            let format = {
+                _ID: respuesta._ID?.toString(),
+                _Altitud_MIN: respuesta._Altitud_MIN?.toString(),
+                _Altitud_MAX: respuesta._Altitud_MAX?.toString(),
+                _Pesticida: respuesta._Pesticida?.toString(),
+                _Owner: respuesta?._Owner
+            }
+            respuesta = format;
+
+        }
+        else if(metodo == 'ObtenerInfoParcelas')
+        {
+            let format = [];
+            respuesta.forEach((parcela) => {
+
+                format.push({
+                    _ID: parcela._ID?.toString(),
+                    _Altitud_MIN: parcela._Altitud_MIN?.toString(),
+                    _Altitud_MAX: parcela._Altitud_MAX?.toString(),
+                    _Pesticida: parcela._Pesticida?.toString(),
+                    _Owner: parcela?._Owner
+                });
+
+            })
+            respuesta = format;
+
+        }
+        else if(metodo == 'ObtenerInfoFumigacion')
+        {
+
+            let format = {
+                _ID: respuesta._ID?.toString(),
+                _IDParcela: respuesta._IDParcela?.toString(),
+                _IDDron: respuesta._IDDron?.toString(),
+                _Pagada: respuesta._Pagada?.toString(),
+                _Finalizada: respuesta?._Finalizada.toString(),
+            }
+            respuesta = format;
+
+        }
+        else if(metodo == 'ObtenerInfoFumigaciones')
+        {
+
+            let format = [];
+            respuesta.forEach((fumigacion) => {
+
+                format.push({
+                    _ID: fumigacion._ID?.toString(),
+                    _IDParcela: fumigacion._IDParcela?.toString(),
+                    _IDDron: fumigacion._IDDron?.toString(),
+                    _Pagada: fumigacion._Pagada?.toString(),
+                    _Finalizada: fumigacion?._Finalizada.toString(),
+                });
+
+            })
+            respuesta = format;
+        }
+        
+
         console.table(respuesta);
     
         return respuesta;

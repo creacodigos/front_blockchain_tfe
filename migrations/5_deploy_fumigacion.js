@@ -8,6 +8,6 @@ module.exports = async function (deployer) {
   const iParcela = await Parcela.deployed();
   const iDron = await Dron.deployed();
   const iFumitoken = await Fumitoken.deployed();
-  deployer.deploy(Fumigacion, iFumitoken.address, iDron.address,iParcela.address);
+  await deployer.deploy(Fumigacion, iFumitoken.address, iDron.address, iParcela.address);
 
 };

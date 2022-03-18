@@ -479,6 +479,47 @@ export default {
       "constant": true
     },
     {
+      "inputs": [],
+      "name": "ObtenerInfoParcelas",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "_ID",
+              "type": "uint256"
+            },
+            {
+              "internalType": "int256",
+              "name": "_Altitud_MIN",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "_Altitud_MAX",
+              "type": "int256"
+            },
+            {
+              "internalType": "enum ParcelaContract._Pesticidas",
+              "name": "_Pesticida",
+              "type": "uint8"
+            },
+            {
+              "internalType": "address",
+              "name": "_Owner",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct ParcelaContract.Parcela[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
       "inputs": [
         {
           "internalType": "uint256",
