@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/Fumigacion.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> Fumigacion.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.54% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.29% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.54% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/26</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">//SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.0; 
+&nbsp;
+//Importamos
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
+import "@openzeppelin/contracts/utils/Address.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+&nbsp;
+import "./Dron.sol";
+import "./Parcela.sol";
+&nbsp;
+//Extendemos del contrato ERC721 (Contrato destinado a Tokens no fungibles)
+contract FumigacionContract is Ownable {
+    using EnumerableSet for EnumerableSet.AddressSet;
+    using Counters for Counters.Counter;
+    Counters.Counter UltimoID;
+&nbsp;
+    //Creamos las variables propias del contrato
+    struct Solicitud_Fumigacion {
+        uint256 _ID;
+        uint256 _IDParcela;
+        uint256 _IDDron;
+        bool _Pagada;
+        bool _Finalizada;
+    }
+&nbsp;
+    mapping(uint256 =&gt; Solicitud_Fumigacion) private _Solicitudes_Fumigacion;
+&nbsp;
+    Solicitud_Fumigacion[] FUMIGACIONES;
+&nbsp;
+    ERC20 _FumiToken;
+    DronContract _Dron;
+    ParcelaContract _Parcela;
+&nbsp;
+    constructor(ERC20 FumiToken, DronContract Dron_, ParcelaContract Parcela_) {
+        _FumiToken = FumiToken;
+        _Dron = Dron_;
+        _Parcela = Parcela_;
+    }
+&nbsp;
+    /*
+    function _QuitarPosicionArray(uint key) internal {
+        require(key &lt; Solicitudes_Fumigacion.length);
+        Solicitudes_Fumigacion[key] = Solicitudes_Fumigacion[Solicitudes_Fumigacion.length-1];
+        Solicitudes_Fumigacion.pop();
+    }
+    */
+&nbsp;
+    event FumigacionRealizada(uint256 IDParcela);
+<span class="fstat-no" title="function not covered" >    function RealizarFumigacion(uint256 IDSolicitud_Fumigacion) public onlyOwner {</span>
+<span class="cstat-no" title="statement not covered" >        require (_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._Pagada, "LA FUMIGACION NO HA SIDO ABONADA")</span>;
+<span class="cstat-no" title="statement not covered" >        require (_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._Finalizada == false, "LA FUMIGACION YA HA SIDO REALIZADA")</span>;
+        //Enciar al dron a fumigar
+<span class="cstat-no" title="statement not covered" >        _Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._Finalizada = true</span>;
+<span class="cstat-no" title="statement not covered" >        emit FumigacionRealizada(_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._IDParcela);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function SolicitarFumigacion(uint256 IDDron, uint256 IDParcela) public returns (uint256){</span>
+<span class="cstat-no" title="statement not covered" >        UltimoID.increment()</span>;
+<span class="cstat-no" title="statement not covered" >        uint256 IDActual = UltimoID.current();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        Solicitud_Fumigacion memory Fumigacion = Solicitud_Fumigacion({</span>
+            _ID: IDActual,
+            _IDParcela: IDParcela,
+            _IDDron: IDDron,
+            _Pagada: false,
+            _Finalizada: false
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        _Solicitudes_Fumigacion[IDActual] = Fumigacion</span>;
+<span class="cstat-no" title="statement not covered" >        FUMIGACIONES.push(Fumigacion)</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return IDActual;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ComprobarCompatibilidad(uint256 IDDron, uint256 IDParcela) public view returns (bool){</span>
+        //solicitar info Parcela
+<span class="cstat-no" title="statement not covered" >        ParcelaContract.Parcela memory Parcela_ = _Parcela.ObtenerInfoParcela(IDParcela);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        bool DronPesticida_ = _Dron.ComprobarPesticida(IDDron,Parcela_._Pesticida);</span>
+<span class="cstat-no" title="statement not covered" >        require (DronPesticida_, "EL DRON NO PUEDE SUMINISTRAR EL PESTICIDA NECESARIO PARA LA PARCELA")</span>;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        bool DronAltitud_ = _Dron.ComprobarAltitud(IDDron,Parcela_._Altitud_MIN,Parcela_._Altitud_MAX);</span>
+<span class="cstat-no" title="statement not covered" >        require (DronAltitud_, "EL DRON NO PUEDE TRABAJAR A LA ALTITUD REQUERIDA")</span>;
+        
+<span class="cstat-no" title="statement not covered" >        return true;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function PagarFumigacion(uint256 IDSolicitud_Fumigacion) public {</span>
+        //solicitar info Dron
+<span class="cstat-no" title="statement not covered" >        DronContract.Dron memory Dron_ = _Dron.ObtenerInfoDron(_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._IDDron);</span>
+        //solicitar info Parcela
+<span class="cstat-no" title="statement not covered" >        ParcelaContract.Parcela memory Parcela_ = _Parcela.ObtenerInfoParcela(_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._IDParcela);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        require (msg.sender == Parcela_._Owner, "Solo el propietario de la parcela puede pagar")</span>;
+        
+        //realizar transferencia
+<span class="cstat-no" title="statement not covered" >        if (_FumiToken.transferFrom(Parcela_._Owner, Dron_._Empresa, Dron_._Coste)) {</span>
+<span class="cstat-no" title="statement not covered" >            _Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._Pagada = true</span>;
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ObtenerInfoFumigacion(uint256 ID) public view returns (Solicitud_Fumigacion memory) {</span>
+<span class="cstat-no" title="statement not covered" >        return _Solicitudes_Fumigacion[ID];</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ObtenerInfoFumigaciones() public view returns (Solicitud_Fumigacion [] memory) {</span>
+<span class="cstat-no" title="statement not covered" >        return FUMIGACIONES;</span>
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 18 2022 20:19:03 GMT+0000 (hora estándar de Europa occidental)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

@@ -367,7 +367,7 @@ export default {
           "type": "uint256"
         },
         {
-          "internalType": "enum DronContract._Pesticidas[]",
+          "internalType": "enum TiposContract._Pesticidas[]",
           "name": "PESTICIDA",
           "type": "uint8[]"
         }
@@ -473,7 +473,7 @@ export default {
           "type": "uint256"
         },
         {
-          "internalType": "enum DronContract._Pesticidas",
+          "internalType": "enum TiposContract._Pesticidas",
           "name": "PESTICIDA",
           "type": "uint8"
         }
@@ -498,7 +498,7 @@ export default {
           "type": "uint256"
         },
         {
-          "internalType": "enum DronContract._Pesticidas",
+          "internalType": "enum TiposContract._Pesticidas",
           "name": "PESTICIDA",
           "type": "uint8"
         }
@@ -522,7 +522,7 @@ export default {
           "type": "uint256"
         },
         {
-          "internalType": "enum DronContract._Pesticidas",
+          "internalType": "enum TiposContract._Pesticidas",
           "name": "PESTICIDA",
           "type": "uint8"
         }
@@ -576,7 +576,7 @@ export default {
               "type": "uint256"
             },
             {
-              "internalType": "enum DronContract._Pesticidas[]",
+              "internalType": "enum TiposContract._Pesticidas[]",
               "name": "_Pesticidas",
               "type": "uint8[]"
             }
@@ -584,6 +584,52 @@ export default {
           "internalType": "struct DronContract.Dron",
           "name": "",
           "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "ObtenerInfoDrones",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "_ID",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "_Empresa",
+              "type": "address"
+            },
+            {
+              "internalType": "int256",
+              "name": "_Altitud_MIN",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "_Altitud_MAX",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_Coste",
+              "type": "uint256"
+            },
+            {
+              "internalType": "enum TiposContract._Pesticidas[]",
+              "name": "_Pesticidas",
+              "type": "uint8[]"
+            }
+          ],
+          "internalType": "struct DronContract.Dron[]",
+          "name": "",
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",
@@ -628,7 +674,7 @@ export default {
           "type": "uint256"
         },
         {
-          "internalType": "enum DronContract._Pesticidas",
+          "internalType": "enum TiposContract._Pesticidas",
           "name": "PESTICIDA",
           "type": "uint8"
         }

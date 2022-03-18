@@ -61,12 +61,48 @@
             background-color: #FAFAFA;
             margin: 1rem 0;
         }
+        header {
+            position: sticky;
+            top: 0;
+            background-color: grey;
+            color: black;
+            padding: 1rem;
+        }
+        header ul {
+            list-style: none;
+            padding: 0 2rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+        }
+        header ul li a{
+            color: white;
+            text-transform: uppercase;
+            text-decoration: none;
+
+        }
+        #infos, #drones, #parcelas, #fumigaciones, #tokens {
+            padding-top: 5rem;
+        }
     </style>
 </head>
 <body>
-    <section class="container my-5">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#infos">Información</a></li>
+                <li><a href="#drones">Drones</a></li>
+                <li><a href="#parcelas">Parcelas</a></li>
+                <li><a href="#fumigaciones">Fumigaciones</a></li>
+                <li><a href="#tokens">Tokens</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="container " id="infos">
         <img src="./img/Metamask.svg" height="50" class="mx-3">
         <button class="btn btn-primary enableEthereumButton">Conectar con Metamask</button>
+        <button class="btn btn-success buttonconectado">Conectado</button>
         
         <form action="">
 
@@ -106,7 +142,7 @@
         </section>
         -->
 <!-- DRON -->
-        <section class="dron">
+        <section class="dron" id="drones">
             <h4>
                 Crear Dron:
             </h4>
@@ -336,6 +372,7 @@
                 </div>
             </form>
             <button class="btn btn-secondary" form="form_dron_obtener_dron" contract="Dron" method="ObtenerInfoDron">Obtener Info Dron</button>
+            <pre class="form_dron_obtener_dron"></pre>
         </section>
         <section class="dron">
             <h4>
@@ -346,7 +383,7 @@
         </section>
 
 <!-- PARCELA -->
-        <section class="parcela">
+        <section class="parcela" id="parcelas"">
             <h4>
                 Crear Parcela:
             </h4>
@@ -455,7 +492,7 @@
         </section>
 
 <!-- Fumigación -->
-        <section class="fumigacion">
+        <section class="fumigacion" id="fumigaciones">
             <h4>
                 Crear Fumigación:
             </h4>
@@ -544,15 +581,18 @@
             <h4>
                 Fumigacion Obtener Todas:
             </h4>
-            <button class="btn btn-secondary" form="form_fumigacion_info_fumigacions" contract="Parcela" method="ObtenerInfoFumigaciones">Obtener Todas Fumigacion</button>
+            <button class="btn btn-secondary" form="form_fumigacion_info_fumigacions" contract="Fumigacion" method="ObtenerInfoFumigaciones">Obtener Todas Fumigacion</button>
             <pre class="form_fumigacion_info_fumigacions"></pre>
         </section>
 
-        <!-- FumiToken -->
-        <section class="fumitoken">
+<!-- FumiToken -->
+        <section class="fumitoken" id="tokens">
+            <h4>
+                Balance de Tokens:
+            </h4>
             <form action="" class="form_balance_fumitoken">
             <div class="mb-3">
-                <label for="showAccount" class="form-label text-bold"><strong>Cuenta conectada con Metamask</strong></label>
+                <label for="showAccount" class="form-label text-bold">Address</label>
                 <input type="text" class="form-control" id="showAccount_balance" >
             </div>
             </form>
@@ -560,9 +600,12 @@
             <pre class="form_balance_fumitoken"></pre>
         </section>
         <section class="fumitoken">
+            <h4>
+                Mintado de Tokens:
+            </h4>
             <form action="" class="form_mint_fumitoken">
                 <div class="mb-3">
-                    <label for="showAccount" class="form-label text-bold"><strong>Cuenta conectada con Metamask</strong></label>
+                    <label for="showAccount" class="form-label text-bold">Address</label>
                     <input type="text" class="form-control" id="showAccount_mint" >
                 </div>
                 <div class="mb-3">

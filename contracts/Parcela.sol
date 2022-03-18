@@ -4,26 +4,19 @@ pragma solidity ^0.8.0;
 //Importamos
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "./Tipos.sol";
 
 //Extendemos del contrato ERC721 (Contrato destinado a Tokens no fungibles)
 contract ParcelaContract is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter UltimoID;
 
-    enum _Pesticidas{
-        Pesticida_A,
-        Pesticida_B,
-        Pesticida_C,
-        Pesticida_D,
-        Pesticida_E
-    }
-
     //Creamos las variables propias del contrato
     struct Parcela {
         uint256 _ID;
         int256 _Altitud_MIN;
         int256 _Altitud_MAX;
-        _Pesticidas _Pesticida;
+        TiposContract._Pesticidas _Pesticida;
         address _Owner;
     }
 
@@ -32,19 +25,6 @@ contract ParcelaContract is ERC721 {
     Parcela[] PARCELAS;
 
     constructor() ERC721("MyParcela", "MParcela") {
-        
-        UltimoID.increment();
-        uint256 IDActual = UltimoID.current();
-        /*
-        Parcela storage Primera = _Parcelas[IDActual];
-  
-        Primera._ID = IDActual;
-        Primera._Altitud_MIN = 0;
-        Primera._Altitud_MAX = 0;
-        Primera._Owner = msg.sender;
-        */
-
-        _safeMint(msg.sender,IDActual);
     }
 
     //Modificador de permisos de acceso
@@ -53,7 +33,10 @@ contract ParcelaContract is ERC721 {
         _;
     }
 
-    function CrearParcela(int256 MIN, int256 MAX, _Pesticidas PESTICIDA) public returns (uint256){
+    function CrearParcela(int256 MIN, int256 MAX, TiposContract._Pesticidas PESTICIDA) public returns (uint256){
+        require (MIN > 0, "EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0");
+        require (MAX >= MIN, "EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO");
+
         UltimoID.increment();
         uint256 IDActual = UltimoID.current();
         _safeMint(msg.sender,IDActual);
@@ -81,7 +64,7 @@ contract ParcelaContract is ERC721 {
         return ( _Parcelas[ID]._Altitud_MIN,  _Parcelas[ID]._Altitud_MAX);
     }
 
-    function ConfigurarPesticida(uint256 ID, _Pesticidas PESTICIDA) public SoloPropietario(ID) returns (bool)
+    function ConfigurarPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloPropietario(ID) returns (bool)
     {
         _Parcelas[ID]._Pesticida = PESTICIDA;
         return true;

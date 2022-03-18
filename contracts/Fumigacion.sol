@@ -8,8 +8,8 @@ import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-import "./DronContract.sol";
-import "./ParcelaContract.sol";
+import "./Dron.sol";
+import "./Parcela.sol";
 
 //Extendemos del contrato ERC721 (Contrato destinado a Tokens no fungibles)
 contract FumigacionContract is Ownable {
@@ -27,6 +27,8 @@ contract FumigacionContract is Ownable {
     }
 
     mapping(uint256 => Solicitud_Fumigacion) private _Solicitudes_Fumigacion;
+
+    Solicitud_Fumigacion[] FUMIGACIONES;
 
     ERC20 _FumiToken;
     DronContract _Dron;
@@ -68,8 +70,22 @@ contract FumigacionContract is Ownable {
         });
 
         _Solicitudes_Fumigacion[IDActual] = Fumigacion;
+        FUMIGACIONES.push(Fumigacion);
 
         return IDActual;
+    }
+
+    function ComprobarCompatibilidad(uint256 IDDron, uint256 IDParcela) public view returns (bool){
+        //solicitar info Parcela
+        ParcelaContract.Parcela memory Parcela_ = _Parcela.ObtenerInfoParcela(IDParcela);
+
+        bool DronPesticida_ = _Dron.ComprobarPesticida(IDDron,Parcela_._Pesticida);
+        require (DronPesticida_, "EL DRON NO PUEDE SUMINISTRAR EL PESTICIDA NECESARIO PARA LA PARCELA");
+
+        bool DronAltitud_ = _Dron.ComprobarAltitud(IDDron,Parcela_._Altitud_MIN,Parcela_._Altitud_MAX);
+        require (DronAltitud_, "EL DRON NO PUEDE TRABAJAR A LA ALTITUD REQUERIDA");
+        
+        return true;
     }
 
     function PagarFumigacion(uint256 IDSolicitud_Fumigacion) public {
@@ -88,5 +104,9 @@ contract FumigacionContract is Ownable {
 
     function ObtenerInfoFumigacion(uint256 ID) public view returns (Solicitud_Fumigacion memory) {
         return _Solicitudes_Fumigacion[ID];
+    }
+
+    function ObtenerInfoFumigaciones() public view returns (Solicitud_Fumigacion [] memory) {
+        return FUMIGACIONES;
     }
 }

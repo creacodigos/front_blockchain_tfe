@@ -4,10 +4,11 @@ let account  = null;
 let provider = null;
 
 const ethereumButton      = document.querySelector('.enableEthereumButton');
+const buttonconectado     = document.querySelector('.buttonconectado');
 const showAccount         = document.querySelector('#showAccount');
 const showAccount_balance = document.querySelector('#showAccount_balance');
 const walletInfo          = document.querySelector('#wallet_info');
-const contratcsInfo      = document.querySelector('#contratcs_info');
+const contratcsInfo       = document.querySelector('#contratcs_info');
 const buttons             = document.querySelectorAll('button');
 
 import ParcelaAbi from './abis/ParcelaContract.js';
@@ -24,10 +25,10 @@ const abis = {
 };
 
 const addresses = {
-    Parcela : '0xb355A6AbB57D9104EE3fDbE50fA0e867CDc6a5ed',
-    Dron : '0x6e4b29191529442aFe31D2851636De397C7eb102',
-    FumiToken : '0xde09F0534Dae297cC3a2E6a5fE6858C22f87F69c',
-    Fumigacion : '0x5bBcbf5B4dB48B700Fe20C5548a4fA0Cf8c37B6b'
+    Parcela : '0xf277a956E59f97b016Da4A1BD117341b2E46Dc75',
+    Dron : '0x46658487660e979A73D65e02C86986a209D59C26',
+    FumiToken : '0x16252f30Ca22e0fb8278e3Ba66b55322Cb0DB9A8',
+    Fumigacion : '0xA5259289E9480F2f5F955e52B90ca156F2780d79'
 }
 
 const _Pesticidas = {
@@ -54,7 +55,7 @@ buttons.forEach(button => {
         if(inputs && form && contract)
         {
 
-            console.log(inputs);
+            //console.log(inputs);
 
             let params = [];
             let checkbox = [];
@@ -66,9 +67,9 @@ buttons.forEach(button => {
                     (input?.type != 'checkbox' && input?.type != 'text' && input?.value)
                 )
                 if(input?.type == 'checkbox' && input?.checked)
-                    checkbox.push(parseInt(input.value));
+                    checkbox.push(input.value.length < 12 && parseInt(input.value) != 'NaN' ? parseInt(input.value) : input.value);
                 else // if(input?.value && (input.))
-                    params.push(input.value);
+                    params.push(input.value.length < 12 && parseInt(input.value) != 'NaN' ? parseInt(input.value) : input.value);
 
             });
 
@@ -176,6 +177,16 @@ function setWalletInfo(){
     walletInfo.value = JSON.stringify({...ethereum._state, chainId: ethereum.chainId}, null, 2);
     showAccount.value = ethereum?._state?.accounts[0] || null;
     showAccount_balance.value = ethereum?._state?.accounts[0] || null;
+    if(ethereum?._state?.accounts[0])
+    {
+        ethereumButton.style.display = 'none';
+        buttonconectado.style.display = 'inline-block';
+    }
+    else
+    {
+        ethereumButton.style.display = 'inline-block';
+        buttonconectado.style.display = 'none';
+    }
 
 }
 

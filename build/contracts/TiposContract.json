@@ -1,0 +1,211 @@
+{
+  "contractName": "TiposContract",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.12+commit.f00d7308\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Tipos.sol\":\"TiposContract\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Tipos.sol\":{\"keccak256\":\"0xae167b91480ae15607076511440b73bd5d95259bc5f3957bd1edb197a05c98d4\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://bd51143276ab06907ae8e7061b029f91f4fe17435bd0fa6b24ea8f4f9e8f743b\",\"dweb:/ipfs/QmPGbrjqUTUCywDJeqyLSV969jNW1739ikWJZJKFGSvpav\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212203cbb313137cad58671d900ec738f705fe1f137bbcb441d3e723ca6772b9cb32e64736f6c634300080c0033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212203cbb313137cad58671d900ec738f705fe1f137bbcb441d3e723ca6772b9cb32e64736f6c634300080c0033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "63:159:20:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "63:159:20:-:0;;;;;",
+  "source": "//SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.0;\n\ncontract TiposContract {\n\n    enum _Pesticidas{\n        Pesticida_A,\n        Pesticida_B,\n        Pesticida_C,\n        Pesticida_D,\n        Pesticida_E\n    }\n}",
+  "sourcePath": "/Users/trabajo/Documents/apps/front_blockchain_tfe/contracts/Tipos.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/Tipos.sol",
+    "exportedSymbols": {
+      "TiposContract": [
+        4373
+      ]
+    },
+    "id": 4374,
+    "license": "UNLICENSED",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4366,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "38:23:20"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "TiposContract",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 4373,
+        "linearizedBaseContracts": [
+          4373
+        ],
+        "name": "TiposContract",
+        "nameLocation": "72:13:20",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "TiposContract._Pesticidas",
+            "id": 4372,
+            "members": [
+              {
+                "id": 4367,
+                "name": "Pesticida_A",
+                "nameLocation": "119:11:20",
+                "nodeType": "EnumValue",
+                "src": "119:11:20"
+              },
+              {
+                "id": 4368,
+                "name": "Pesticida_B",
+                "nameLocation": "140:11:20",
+                "nodeType": "EnumValue",
+                "src": "140:11:20"
+              },
+              {
+                "id": 4369,
+                "name": "Pesticida_C",
+                "nameLocation": "161:11:20",
+                "nodeType": "EnumValue",
+                "src": "161:11:20"
+              },
+              {
+                "id": 4370,
+                "name": "Pesticida_D",
+                "nameLocation": "182:11:20",
+                "nodeType": "EnumValue",
+                "src": "182:11:20"
+              },
+              {
+                "id": 4371,
+                "name": "Pesticida_E",
+                "nameLocation": "203:11:20",
+                "nodeType": "EnumValue",
+                "src": "203:11:20"
+              }
+            ],
+            "name": "_Pesticidas",
+            "nameLocation": "98:11:20",
+            "nodeType": "EnumDefinition",
+            "src": "93:127:20"
+          }
+        ],
+        "scope": 4374,
+        "src": "63:159:20",
+        "usedErrors": []
+      }
+    ],
+    "src": "38:184:20"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/Tipos.sol",
+    "exportedSymbols": {
+      "TiposContract": [
+        4373
+      ]
+    },
+    "id": 4374,
+    "license": "UNLICENSED",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4366,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "38:23:20"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "TiposContract",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 4373,
+        "linearizedBaseContracts": [
+          4373
+        ],
+        "name": "TiposContract",
+        "nameLocation": "72:13:20",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "TiposContract._Pesticidas",
+            "id": 4372,
+            "members": [
+              {
+                "id": 4367,
+                "name": "Pesticida_A",
+                "nameLocation": "119:11:20",
+                "nodeType": "EnumValue",
+                "src": "119:11:20"
+              },
+              {
+                "id": 4368,
+                "name": "Pesticida_B",
+                "nameLocation": "140:11:20",
+                "nodeType": "EnumValue",
+                "src": "140:11:20"
+              },
+              {
+                "id": 4369,
+                "name": "Pesticida_C",
+                "nameLocation": "161:11:20",
+                "nodeType": "EnumValue",
+                "src": "161:11:20"
+              },
+              {
+                "id": 4370,
+                "name": "Pesticida_D",
+                "nameLocation": "182:11:20",
+                "nodeType": "EnumValue",
+                "src": "182:11:20"
+              },
+              {
+                "id": 4371,
+                "name": "Pesticida_E",
+                "nameLocation": "203:11:20",
+                "nodeType": "EnumValue",
+                "src": "203:11:20"
+              }
+            ],
+            "name": "_Pesticidas",
+            "nameLocation": "98:11:20",
+            "nodeType": "EnumDefinition",
+            "src": "93:127:20"
+          }
+        ],
+        "scope": 4374,
+        "src": "63:159:20",
+        "usedErrors": []
+      }
+    ],
+    "src": "38:184:20"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.12+commit.f00d7308.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.6",
+  "updatedAt": "2022-03-18T16:26:30.941Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

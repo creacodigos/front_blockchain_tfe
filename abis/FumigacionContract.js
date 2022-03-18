@@ -129,6 +129,31 @@ export default {
       "inputs": [
         {
           "internalType": "uint256",
+          "name": "IDDron",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "IDParcela",
+          "type": "uint256"
+        }
+      ],
+      "name": "ComprobarCompatibilidad",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
           "name": "IDSolicitud_Fumigacion",
           "type": "uint256"
         }
@@ -179,6 +204,47 @@ export default {
           "internalType": "struct FumigacionContract.Solicitud_Fumigacion",
           "name": "",
           "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "ObtenerInfoFumigaciones",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "_ID",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_IDParcela",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_IDDron",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "_Pagada",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "_Finalizada",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct FumigacionContract.Solicitud_Fumigacion[]",
+          "name": "",
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",

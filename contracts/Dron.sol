@@ -4,19 +4,12 @@ pragma solidity ^0.8.0;
 //Importamos
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "./Tipos.sol";
 
 //Extendemos del contrato ERC721 (Contrato destinado a Tokens no fungibles)
 contract DronContract is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter UltimoID;
-
-    enum _Pesticidas{
-        Pesticida_A,
-        Pesticida_B,
-        Pesticida_C,
-        Pesticida_D,
-        Pesticida_E
-    }
 
     //Creamos las variables propias del contrato
     struct Dron {
@@ -25,25 +18,13 @@ contract DronContract is ERC721 {
         int256 _Altitud_MIN;
         int256 _Altitud_MAX;
         uint256 _Coste;
-        _Pesticidas[] _Pesticidas;
+        TiposContract._Pesticidas[] _Pesticidas;
     }
 
     mapping(uint256 => Dron) private _Drones;
+    Dron[] DRONES;
 
     constructor() ERC721("MyDron", "MDron") {
-
-        UltimoID.increment();
-        uint256 IDActual = UltimoID.current();
-        /*
-        Dron storage Primero = _Drones[IDActual];
-  
-        Primero._ID = IDActual;
-        Primero._Altitud_MIN = 0;
-        Primero._Altitud_MAX = 0;
-        Primero._Coste = 0;
-        */
-
-        _safeMint(msg.sender,IDActual);
     }
 
     //Modificador de permisos de acceso
@@ -58,7 +39,12 @@ contract DronContract is ERC721 {
         _;
     }
 
-    function CrearDron(address EMPRESA, int256 MIN, int256 MAX, uint256 COSTE, _Pesticidas[] calldata PESTICIDA) public returns (uint256){
+    function CrearDron(address EMPRESA, int256 MIN, int256 MAX, uint256 COSTE, TiposContract._Pesticidas[] calldata PESTICIDA) public returns (uint256){
+        require (MIN > 0, "EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0");
+        require (MAX >= MIN, "EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO");
+        require (COSTE > 0, "EL VALOR DE COSTE DEBE SER MAYOR A 0");
+        require (PESTICIDA.length > 0, "EL DRON DEBE CONTENER AL MENOS UN PESTICIDA");
+
         UltimoID.increment();
         uint256 IDActual = UltimoID.current();
         _safeMint(msg.sender,IDActual);
@@ -72,6 +58,7 @@ contract DronContract is ERC721 {
         });
 
         _Drones[IDActual] = Dron_;
+        DRONES.push(Dron_);
 
         return IDActual;
     }
@@ -98,7 +85,7 @@ contract DronContract is ERC721 {
         return true;
     }
 
-    function BuscarPesticida(uint256 ID, _Pesticidas PESTICIDA) public view returns (int)
+    function BuscarPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public view returns (int)
     {
         for (int i = 0; i < int(_Drones[ID]._Pesticidas.length); i++) {
             if (_Drones[ID]._Pesticidas[uint(i)] == PESTICIDA) {
@@ -108,11 +95,11 @@ contract DronContract is ERC721 {
         return -1;
     }
 
-    function AltaPesticida(uint256 ID, _Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool)
+    function AltaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool)
     {
         int key = BuscarPesticida(ID, PESTICIDA);
         if (key >= 0) {
-            return true;
+            return false;
         } else {
             _Drones[ID]._Pesticidas.push(PESTICIDA);
             return true;
@@ -125,19 +112,23 @@ contract DronContract is ERC721 {
         _Drones[ID]._Pesticidas.pop();
     }
 
-    function BajaPesticida(uint256 ID, _Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (int)
+    function BajaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool)
     {
         int key = BuscarPesticida(ID, PESTICIDA);
         if (key >= 0) {
             _QuitarPosicionArray(ID, uint(key));
-            return key;
+            return true;
         } else {
-            return key;
+            return false;
         }
     }
 
     function ObtenerInfoDron(uint256 ID) public view returns (Dron memory) {
         return _Drones[ID];
+    }
+
+    function ObtenerInfoDrones() public view returns (Dron [] memory) {
+        return DRONES;
     }
 
     function ComprobarAltitud(uint256 ID, int256 MIN, int256 MAX) public view returns (bool)
@@ -157,7 +148,7 @@ contract DronContract is ERC721 {
         }
     }
 
-    function ComprobarPesticida(uint256 ID, _Pesticidas PESTICIDA) public view returns (bool)
+    function ComprobarPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public view returns (bool)
     {
         int key = BuscarPesticida(ID, PESTICIDA);
         if (key >= 0) {

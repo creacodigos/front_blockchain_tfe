@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts/Dron.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> Dron.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.3% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>15/53</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">17.65% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>6/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">27.27% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>15/55</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">//SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.0; 
+&nbsp;
+//Importamos
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "./Tipos.sol";
+&nbsp;
+//Extendemos del contrato ERC721 (Contrato destinado a Tokens no fungibles)
+contract DronContract is ERC721 {
+    using Counters for Counters.Counter;
+    Counters.Counter UltimoID;
+&nbsp;
+    //Creamos las variables propias del contrato
+    struct Dron {
+        uint256 _ID;
+        address _Empresa; 
+        int256 _Altitud_MIN;
+        int256 _Altitud_MAX;
+        uint256 _Coste;
+        TiposContract._Pesticidas[] _Pesticidas;
+    }
+&nbsp;
+    mapping(uint256 =&gt; Dron) private _Drones;
+    Dron[] DRONES;
+&nbsp;
+    constructor() ERC721("MyDron", "MDron") {
+    }
+&nbsp;
+    //Modificador de permisos de acceso
+<span class="fstat-no" title="function not covered" >    modifier SoloPropietario(uint256 ID){</span>
+<span class="cstat-no" title="statement not covered" >        require(msg.sender == ownerOf(ID))</span>;
+        _;
+    }
+&nbsp;
+    //Modificador de permisos de acceso
+<span class="fstat-no" title="function not covered" >    modifier SoloEmpresa(uint256 ID){</span>
+<span class="cstat-no" title="statement not covered" >        require(msg.sender == _Drones[ID]._Empresa || msg.sender == ownerOf(ID))</span>;
+        _;
+    }
+&nbsp;
+    function CrearDron(address EMPRESA, int256 MIN, int256 MAX, uint256 COSTE, TiposContract._Pesticidas[] calldata PESTICIDA) public returns (uint256){
+        <span class="missing-if-branch" title="else path not taken" >E</span>require (MIN &gt; 0, "EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require (MAX &gt;= MIN, "EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require (COSTE &gt; 0, "EL VALOR DE COSTE DEBE SER MAYOR A 0");
+        <span class="missing-if-branch" title="else path not taken" >E</span>require (PESTICIDA.length &gt; 0, "EL DRON DEBE CONTENER AL MENOS UN PESTICIDA");
+&nbsp;
+        UltimoID.increment();
+        uint256 IDActual = UltimoID.current();
+        _safeMint(msg.sender,IDActual);
+        Dron memory Dron_ = Dron({
+            _ID: IDActual,
+            _Empresa: EMPRESA,
+            _Altitud_MIN: MIN,
+            _Altitud_MAX: MAX,
+            _Coste: COSTE,
+            _Pesticidas: PESTICIDA            
+        });
+&nbsp;
+        _Drones[IDActual] = Dron_;
+        DRONES.push(Dron_);
+&nbsp;
+        return IDActual;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ConfigurarEmpresa(uint256 ID, address EMPRESA) public SoloPropietario(ID) returns (bool)</span>
+    {
+<span class="cstat-no" title="statement not covered" >        _Drones[ID]._Empresa = EMPRESA</span>;
+<span class="cstat-no" title="statement not covered" >        return true;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ConfigurarAltitud(uint256 ID, int256 MIN, int256 MAX) public SoloEmpresa(ID) returns (int256, int256)</span>
+    {
+<span class="cstat-no" title="statement not covered" >        require (MIN &gt; 0, "EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0")</span>;
+<span class="cstat-no" title="statement not covered" >        require (MAX &gt;= MIN, "EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO")</span>;
+<span class="cstat-no" title="statement not covered" >        _Drones[ID]._Altitud_MIN = MIN</span>;
+<span class="cstat-no" title="statement not covered" >        _Drones[ID]._Altitud_MAX = MAX</span>;
+<span class="cstat-no" title="statement not covered" >        return (_Drones[ID]._Altitud_MIN, _Drones[ID]._Altitud_MAX);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ConfigurarCoste(uint256 ID, uint256 COSTE) public SoloEmpresa(ID) returns (bool)</span>
+    {
+<span class="cstat-no" title="statement not covered" >        require (COSTE &gt; 0, "EL COSTE DEBE SER MAYOR A 0")</span>;
+<span class="cstat-no" title="statement not covered" >        _Drones[ID]._Coste = COSTE</span>;
+<span class="cstat-no" title="statement not covered" >        return true;</span>
+    }
+&nbsp;
+    function BuscarPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public view returns (int)
+    {
+        for (int i = 0; i &lt; int(_Drones[ID]._Pesticidas.length); i++) {
+            if (_Drones[ID]._Pesticidas[uint(i)] == PESTICIDA) {
+                return i;
+            }
+        }
+        return -1;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function AltaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool)</span>
+    {
+<span class="cstat-no" title="statement not covered" >        int key = BuscarPesticida(ID, PESTICIDA);</span>
+<span class="cstat-no" title="statement not covered" >        if (key &gt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return true;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            _Drones[ID]._Pesticidas.push(PESTICIDA)</span>;
+<span class="cstat-no" title="statement not covered" >            return true;</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function _QuitarPosicionArray(uint256 ID, uint key) internal {</span>
+<span class="cstat-no" title="statement not covered" >        require(key &lt; _Drones[ID]._Pesticidas.length)</span>;
+<span class="cstat-no" title="statement not covered" >        _Drones[ID]._Pesticidas[key] = _Drones[ID]._Pesticidas[_Drones[ID]._Pesticidas.length-1]</span>;
+<span class="cstat-no" title="statement not covered" >        _Drones[ID]._Pesticidas.pop()</span>;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function BajaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (int)</span>
+    {
+<span class="cstat-no" title="statement not covered" >        int key = BuscarPesticida(ID, PESTICIDA);</span>
+<span class="cstat-no" title="statement not covered" >        if (key &gt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >            _QuitarPosicionArray(ID, uint(key))</span>;
+<span class="cstat-no" title="statement not covered" >            return key;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            return key;</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ObtenerInfoDron(uint256 ID) public view returns (Dron memory) {</span>
+<span class="cstat-no" title="statement not covered" >        return _Drones[ID];</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ObtenerInfoDrones() public view returns (Dron [] memory) {</span>
+<span class="cstat-no" title="statement not covered" >        return DRONES;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ComprobarAltitud(uint256 ID, int256 MIN, int256 MAX) public view returns (bool)</span>
+    {
+<span class="cstat-no" title="statement not covered" >        if ((MAX &lt; _Drones[ID]._Altitud_MIN) || (MIN &gt; _Drones[ID]._Altitud_MAX) || (MIN &gt; MAX)) {</span>
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            if ((MAX &gt;= _Drones[ID]._Altitud_MIN &amp;&amp; MAX &lt;= _Drones[ID]._Altitud_MAX) || (MIN &lt;= _Drones[ID]._Altitud_MAX &amp;&amp; MIN &gt;= _Drones[ID]._Altitud_MIN)) {</span>
+<span class="cstat-no" title="statement not covered" >                return true;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                if ((MAX &gt;= _Drones[ID]._Altitud_MAX &amp;&amp; MIN &lt;= _Drones[ID]._Altitud_MIN) || (MAX &lt;= _Drones[ID]._Altitud_MAX &amp;&amp; MIN &gt;= _Drones[ID]._Altitud_MIN)) {</span>
+<span class="cstat-no" title="statement not covered" >                    return true;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    return false;</span>
+                }
+            }
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function ComprobarPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public view returns (bool)</span>
+    {
+<span class="cstat-no" title="statement not covered" >        int key = BuscarPesticida(ID, PESTICIDA);</span>
+<span class="cstat-no" title="statement not covered" >        if (key &gt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return true;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+    }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 18 2022 20:19:03 GMT+0000 (hora estándar de Europa occidental)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

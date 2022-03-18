@@ -357,7 +357,7 @@ export default {
           "type": "int256"
         },
         {
-          "internalType": "enum ParcelaContract._Pesticidas",
+          "internalType": "enum TiposContract._Pesticidas",
           "name": "PESTICIDA",
           "type": "uint8"
         }
@@ -415,7 +415,7 @@ export default {
           "type": "uint256"
         },
         {
-          "internalType": "enum ParcelaContract._Pesticidas",
+          "internalType": "enum TiposContract._Pesticidas",
           "name": "PESTICIDA",
           "type": "uint8"
         }
@@ -459,7 +459,7 @@ export default {
               "type": "int256"
             },
             {
-              "internalType": "enum ParcelaContract._Pesticidas",
+              "internalType": "enum TiposContract._Pesticidas",
               "name": "_Pesticida",
               "type": "uint8"
             },
@@ -500,7 +500,7 @@ export default {
               "type": "int256"
             },
             {
-              "internalType": "enum ParcelaContract._Pesticidas",
+              "internalType": "enum TiposContract._Pesticidas",
               "name": "_Pesticida",
               "type": "uint8"
             },
