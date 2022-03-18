@@ -19,6 +19,27 @@
             margin-bottom: 1rem;
             border: 1px solid black;
         }
+        section.container section.dron{
+            border-color: brown;
+            color: brown;
+        }
+        section.container section.dron button{
+            background-color: brown;
+        }
+        section.container section.parcela{
+            border-color: blue;
+            color: blue;
+        }
+        section.container section.parcela button{
+            background-color: blue;
+        }
+        section.container section.fumigacion{
+            border-color: green;
+            color: green;
+        }
+        section.container section.fumigacion button{
+            background-color: green;
+        }
         form {
             padding: 1rem;
         }
@@ -44,7 +65,6 @@
             </div>
         </form>
         <!--
-        -->
         <section class="">
             <h4>
                 Send transaction:
@@ -65,8 +85,9 @@
             <button class="sendEthButton btn btn-secondary">Send Eth</button>
 
         </section>
-
-        <section class="crear_dron">
+        -->
+<!-- DRON -->
+        <section class="dron">
             <h4>
                 Crear Dron:
             </h4>
@@ -87,31 +108,31 @@
                 <div class="mb-3">
                     <label for="coste" class="form-label">Pesticidas</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_A" id="pesticida_a">
+                        <input class="form-check-input" type="checkbox" value="1" id="pesticida_a">
                         <label class="form-check-label" for="pesticida_a">
                             Pesticida A
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_B" id="pesticida_b">
+                        <input class="form-check-input" type="checkbox" value="2" id="pesticida_b">
                         <label class="form-check-label" for="pesticida_b">
                             Pesticida B
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_C" id="pesticida_c">
+                        <input class="form-check-input" type="checkbox" value="3" id="pesticida_c">
                         <label class="form-check-label" for="pesticida_c">
                             Pesticida C
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_D" id="pesticida_d">
+                        <input class="form-check-input" type="checkbox" value="4" id="pesticida_d">
                         <label class="form-check-label" for="pesticida_d">
                             Pesticida D
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Pesticida_E" id="pesticida_e">
+                        <input class="form-check-input" type="checkbox" value="5" id="pesticida_e">
                         <label class="form-check-label" for="pesticida_e">
                             Pesticida E
                         </label>
@@ -124,7 +145,174 @@
             </form>
             <button class="sendCreateDron btn btn-secondary" form="form_crear_dron" contract="Dron" method="CrearDron">Crear Dron</button>
         </section>
-        <section class="crear_dron">
+        <section class="dron">
+            <h4>
+                Dron Configurar Empresa:
+            </h4>
+            <form action="" id="form_dron_congifurar_empresa">
+                <div class="mb-3">
+                    <label for="select_dron" class="form-label">Dron</label>
+                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
+                        <option selected>Seleccionar Dron</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="select_empresa" class="form-label">Empresa</label>
+                    <!-- INPUT ADDRESS -->
+                    <input type="nutextmber" class="form-control" id="CreateDronEmpresa" value="0x4B87e2d65FaCF3e16Aa99a6704aa99c666539a56">
+                </div>
+            </form>
+            <button class="btn btn-secondary" form="form_dron_congifurar_empresa" contract="Dron" method="ConfigurarEmpresa">Configurar Empresa</button>
+        </section>
+        <section class="dron">
+            <h4>
+                Dron Configurar Altitud:
+            </h4>
+            <form action="" id="form_dron_congifurar_altitud">
+                <div class="mb-3">
+                    <label for="select_dron" class="form-label">Dron</label>
+                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
+                        <option selected>Seleccionar Dron</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="altura_minima" class="form-label">Altura Mínima</label>
+                    <input type="number" class="form-control" id="altura_minima">
+                </div>
+                <div class="mb-3">
+                    <label for="altura_maxima" class="form-label">Altura Máxima</label>
+                    <input type="number" class="form-control" id="altura_maxima">
+                </div>
+            </form>
+            <button class="btn btn-secondary" form="form_dron_congifurar_altitud" contract="Dron" method="ConfigurarAltitud">Configurar Altitud</button>
+        </section>
+        <section class="dron">
+            <h4>
+                Dron Configurar Coste:
+            </h4>
+            <form action="" id="form_dron_congifurar_coste">
+                <div class="mb-3">
+                    <label for="select_dron" class="form-label">Dron</label>
+                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
+                        <option selected>Seleccionar Dron</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="coste" class="form-label">Coste</label>
+                    <input type="number" class="form-control" id="coste">
+                </div>
+            </form>
+            <button class="btn btn-secondary" form="form_dron_congifurar_coste" contract="Dron" method="ConfigurarCoste">Configurar Coste</button>
+        </section>
+        <section class="dron">
+            <h4>
+                Dron Buscar Pesticida:
+            </h4>
+            <form action="" id="form_dron_congifurar_coste">
+                <div class="mb-3">
+                    <label for="select_dron" class="form-label">Dron</label>
+                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
+                        <option selected>Seleccionar Dron</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <select class="form-select" id="perticida" aria-label="Seleccionar Pesticida">
+                    <option selected>Seleccionar Pesticida</option>
+                    <option value="1">Pesticida A</option>
+                    <option value="2">Pesticida B</option>
+                    <option value="3">Pesticida C</option>
+                    <option value="4">Pesticida D</option>
+                    <option value="5">Pesticida E</option>
+                </select>
+            </form>
+            <button class="btn btn-secondary" form="form_dron_congifurar_coste" contract="Dron" method="BuscarPesticida">Buscar Pesticida</button>
+        </section>
+        <section class="dron">
+            <h4>
+                Dron Alta Pesticida:
+            </h4>
+            <form action="" id="form_dron_congifurar_coste">
+                <div class="mb-3">
+                    <label for="select_dron" class="form-label">Dron</label>
+                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
+                        <option selected>Seleccionar Dron</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="desticida" class="form-label">Pesticida</label>
+                    <input type="text" class="form-control" id="pesticida">
+                </div>
+            </form>
+            <button class="btn btn-secondary" form="form_dron_congifurar_coste" contract="Dron" method="AltaPesticida">Alta Pesticida</button>
+        </section>
+        <section class="dron">
+            <h4>
+                Dron Baja Pesticida:
+            </h4>
+            <form action="" id="form_dron_congifurar_coste">
+                <div class="mb-3">
+                    <label for="select_dron" class="form-label">Dron</label>
+                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
+                        <option selected>Seleccionar Dron</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="desticida" class="form-label">Pesticida</label>
+                    <select class="form-select" id="perticida" aria-label="Seleccionar Pesticida">
+                        <option selected>Seleccionar Pesticida</option>
+                        <option value="1">Pesticida A</option>
+                        <option value="2">Pesticida B</option>
+                        <option value="3">Pesticida C</option>
+                        <option value="4">Pesticida D</option>
+                        <option value="5">Pesticida E</option>
+                    </select>
+                </div>
+            </form>
+            <button class="btn btn-secondary" form="form_dron_congifurar_coste" contract="Dron" method="BajaPesticida">Baja Pesticida</button>
+        </section>
+        <section class="dron">
+            <h4>
+                Dron Obtener Info Dron:
+            </h4>
+            <form action="" id="form_dron_obtener_dron">
+                <div class="mb-3">
+                    <label for="select_dron" class="form-label">Dron</label>
+                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
+                        <option selected>Seleccionar Dron</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </form>
+            <button class="btn btn-secondary" form="form_dron_obtener_dron" contract="Dron" method="ObtenerInfoDron">Obtener Info Dron</button>
+        </section>
+        <section class="dron">
+            <h4>
+                Dron Obtener Info Drones:
+            </h4>
+            <button class="btn btn-secondary" form="form_dron_obtener_dron" contract="Dron" method="ObtenerInfoDrones">Obtener Info Drones</button>
+        </section>
+
+<!-- PARCELA -->
+        <section class="parcela crear_parcela">
             <h4>
                 Crear Parcela:
             </h4>
@@ -144,12 +332,14 @@
                         <option value="1">Pesticida A</option>
                         <option value="2">Pesticida B</option>
                         <option value="3">Pesticida C</option>
+                        <option value="4">Pesticida D</option>
+                        <option value="5">Pesticida E</option>
                     </select>
                 </div>
             </form>
             <button class="sendCreateParcela btn btn-secondary" form="form_crear_parcela" contract="Parcela" method="CrearParcela">Crear Parcela</button>
         </section>
-        <section class="crear_fumigacion">
+        <section class="fumigacion crear_fumigacion">
             <h4>
                 Crear Fumigación:
             </h4>
