@@ -22,9 +22,11 @@
 //
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
+require('dotenv').config()
 
 const PrivateKeyProvider = require("truffle-privatekey-provider");
-const privKeyrinkeby = process.env.PRIVATE_KEY;
+const privKeyrinkeby = '23c4a03b9a56645e0b2477ac4807e453b3d16d5253ef9697ed1ded0aaf15a1ea'; // process.env.PRIVATE_KEY;
+
 
 module.exports = {
   /**
@@ -45,9 +47,9 @@ module.exports = {
     // options below to some value.
     //
     development: {
-    provider: () => new PrivateKeyProvider(privKeyrinkeby, "http://127.0.0.1:8545/"),
+    provider: () => new PrivateKeyProvider(privKeyrinkeby, "http://127.0.0.1:9545/"),
      host: "127.0.0.1",     // Localhost (default: none)
-     port: 8545,            // Standard Ethereum port (default: none)
+     port: 9545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
     // Another network with more advanced options...

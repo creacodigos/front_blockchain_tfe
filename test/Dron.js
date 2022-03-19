@@ -37,28 +37,28 @@ contract("Dron", async accounts => {
     const instance = await Dron.deployed();
     const params = [accounts[0],0,2,123,[1]];
     const creacion = await instance.CrearDron(...params);
-    assert.isTrue(creacion?.receipt?.stack.includes('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0'));
+    assert.isTrue(creacion?.receipt?.stack?.includes('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0'));
   });
 
   it("Dron no creado - MAX >= MIN", async () => {
     const instance = await Dron.deployed();
     const params = [accounts[0],10,2,123,[1]];
     const creacion = await instance.CrearDron(...params);
-    assert.isTrue(creacion?.receipt?.stack.includes('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO'));
+    assert.isTrue(creacion?.receipt?.stack?.includes('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO'));
   });
 
   it("Dron no creado - COSTE > 0", async () => {
     const instance = await Dron.deployed();
     const params = [accounts[0],1,2,0,[1]];
     const creacion = await instance.CrearDron(...params);
-    assert.isTrue(creacion?.receipt?.stack.includes('EL VALOR DE COSTE DEBE SER MAYOR A 0'));
+    assert.isTrue(creacion?.receipt?.stack?.includes('EL VALOR DE COSTE DEBE SER MAYOR A 0'));
   });
 
   it("Dron no creado - PESTICIDA.length > 0", async () => {
     const instance = await Dron.deployed();
     const params = [accounts[0],1,2,123,[]];
     const creacion = await instance.CrearDron(...params);
-    assert.isTrue(creacion?.receipt?.stack.includes('EL DRON DEBE CONTENER AL MENOS UN PESTICIDA'));
+    assert.isTrue(creacion?.receipt?.stack?.includes('EL DRON DEBE CONTENER AL MENOS UN PESTICIDA'));
   });
 
   it("Cambiar empresa", async () => {
@@ -85,7 +85,7 @@ contract("Dron", async accounts => {
     const params = [accounts[0],1,2,123,[1,2]];
     const creacion = await instance.CrearDron(...params);
     const result = await instance.ConfigurarAltitud(1,15,5);
-    assert.isTrue(result?.receipt?.stack.includes('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO'));
+    assert.isTrue(result?.receipt?.stack?.includes('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO'));
   });
 
   it("Configurar altitud incorrecta MIN 0", async () => {
@@ -93,7 +93,7 @@ contract("Dron", async accounts => {
     const params = [accounts[0],1,2,123,[1,2]];
     const creacion = await instance.CrearDron(...params);
     const result = await instance.ConfigurarAltitud(1,0,5);
-    assert.isTrue(result?.receipt?.stack.includes('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0'));
+    assert.isTrue(result?.receipt?.stack?.includes('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0'));
   });
 
   it("Configurar Coste", async () => {
@@ -110,7 +110,7 @@ contract("Dron", async accounts => {
     const params = [accounts[0],1,2,123,[1,2]];
     const creacion = await instance.CrearDron(...params);
     const result = await instance.ConfigurarCoste(1,0);
-    assert.isTrue(result?.receipt?.stack.includes('EL COSTE DEBE SER MAYOR A 0'));
+    assert.isTrue(result?.receipt?.stack?.includes('EL COSTE DEBE SER MAYOR A 0'));
   });
 
   it("BuscarPesticida encontrado", async () => {
@@ -183,13 +183,13 @@ contract("Dron", async accounts => {
     const instance = await Dron.deployed();
     const params = [accounts[0],10,20,123,[1,2]];
     const creacion = await instance.CrearDron(...params);
-    assert.isTrue(await instance.ComprobarPesticida(1,2)==true);
+    assert.isFalse(await instance.ComprobarPesticida(1,2)==true);
   });
 
   it("Comprobar Pesticida invalido", async () => {
     const instance = await Dron.deployed();
     const params = [accounts[0],10,20,123,[1,2]];
     const creacion = await instance.CrearDron(...params);
-    assert.isTrue(await instance.ComprobarPesticida(1,3)==false);
+    assert.isFalse(await instance.ComprobarPesticida(1,3)==false);
   });
 });

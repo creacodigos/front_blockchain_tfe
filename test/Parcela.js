@@ -35,14 +35,14 @@ contract("Parcela", async accounts => {
     const instance = await Parcela.deployed();
     const params = [0,2,1];
     const creacion = await instance.CrearParcela(...params);
-    assert.isTrue(creacion?.receipt?.stack.includes('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0'));
+    assert.isTrue(creacion?.receipt?.stack?.includes('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0'));
   });
 
   it("Parcela no creado - MAX >= MIN", async () => {
     const instance = await Parcela.deployed();
     const params = [10,2,1];
     const creacion = await instance.CrearParcela(...params);
-    assert.isTrue(creacion?.receipt?.stack.includes('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO'));
+    assert.isTrue(creacion?.receipt?.stack?.includes('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO'));
   });
 
 // EDITA
@@ -62,7 +62,7 @@ contract("Parcela", async accounts => {
     const params = [1,2,3];
     await instance.CrearParcela(...params);
     const result = await instance.ConfigurarAltitud(1,15,5);
-    assert.isTrue(result?.receipt?.stack.includes('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO'));
+    assert.isTrue(result?.receipt?.stack?.includes('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO'));
   });
 
   it("Configurar altitud incorrecta MIN 0", async () => {
@@ -70,7 +70,7 @@ contract("Parcela", async accounts => {
     const params = [1,2,3];
     await instance.CrearParcela(...params);
     const result = await instance.ConfigurarAltitud(1,0,5);
-    assert.isTrue(result?.receipt?.stack.includes('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0'));
+    assert.isTrue(result?.receipt?.stack?.includes('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0'));
   });
 
   it("Configurar Pesticida correcta", async () => {
