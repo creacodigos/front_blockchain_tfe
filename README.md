@@ -109,3 +109,7 @@ Ejecutar Test específico:
 Ejecutar cobertura de tests:
 
 `yarn truffle run coverage`
+
+Solidity Visual Developer para auditar visualmente los contratos desde el editor:
+
+`https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor`
