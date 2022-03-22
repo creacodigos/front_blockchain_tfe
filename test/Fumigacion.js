@@ -1,6 +1,7 @@
 const Fumigacion = artifacts.require("FumigacionContract");
 const Dron = artifacts.require("DronContract");
 const Parcela = artifacts.require("ParcelaContract");
+const Fumitoken = artifacts.require("FumiTokenContract");
 const assert = require("chai").assert;
 
 contract("Fumigacion", async accounts => {
@@ -8,49 +9,35 @@ contract("Fumigacion", async accounts => {
     let contractF = null;
     let contractD = null;
     let contractP = null;
-  const waitTime = 3000;
+    let contractT = null;
+  const waitTime = 1000;
 
-  before("deploy contract", async function () {
+  beforeEach("deploy contract", async function () {
     this.timeout(waitTime);
     contractD = await Dron.new();
     contractP = await Parcela.new();
-    contractF = await Fumigacion.new();
+    contractT = await Fumitoken.new();
+    contractF = await Fumigacion.new(contractT.address,contractD.address,contractP.address);
   });
-
-    async function createDron(){
-
-        const instanceD = await Dron.deployed();
-        const paramsD = [accounts[0],1,2,123,[1]]
-        await instanceD.CrearDron(...paramsD);
-        const dron = await instanceD.ObtenerInfoDron(1);
-        return dron;
-    }
-    async function createParcela(){
-
-        const instanceP = await Parcela.deployed();
-        const paramsP = [1,2,1];
-        await instanceP.CrearParcela(...paramsP);
-        const parcela = await instanceP.ObtenerInfoParcela(1);
-        return parcela;
-    }
 
   it("Fumigacion creado", async () => {
 
-    /*const instanceD = await Dron.deployed();
-    const paramsD = [accounts[0],1,2,123,[1]]
-    await instanceD.CrearDron(...paramsD);
+    const paramsD = [accounts[0],1,2,123,[1,2]]
+    const dron = await contractD.CrearDron(...paramsD);
+    console.log(dron);
 
-    const instanceP = await Parcela.deployed();
     const paramsP = [1,2,1];
-    await instanceP.CrearParcela(...paramsP);*/
+    const parcela = await contractP.CrearParcela(...paramsP);
+    console.log(parcela);
 
+/*
     await createDron();
     await createParcela();
-    
-    const instance = await Fumigacion.deployed();
-    await instance.SolicitarFumigacion(1,1);
-    const fumigacion = await instance.ObtenerInfoFumigacion(1);
-    assert.equal(fumigacion._ID?.toString(),'1');
+    */
+
+    // await contractF.SolicitarFumigacion(1,1);
+    // const fumigacion = await contractF.ObtenerInfoFumigacion(1);
+    // assert.equal(fumigacion._ID?.toString(),'1');
     
   });
 

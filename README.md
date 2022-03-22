@@ -81,7 +81,7 @@ Agrego balance a la cuenta definida:
 
 `yarn ganache-cli --account="<PRIVATE_KEY>,<BALANCE>"`
 
-Lanzamos el migrate en la red local:
+Lanzamos el migrate en la red local (requiere `yarn truffle develop`):
 
 `yarn truffle migrate`
 
@@ -98,7 +98,7 @@ Ejecutamos la compilación en rinkeby:
 
 `yarn truffle migrate --network rinkeby (Compila y despliegua contratos en rinkeby)`
 
-Ejecutar Test completos:
+Ejecutar Test completos (require tener levantado el nodo el `yarn truffle develop`):
 
 `yarn truffle test`
 
@@ -113,3 +113,21 @@ Ejecutar cobertura de tests:
 Solidity Visual Developer para auditar visualmente los contratos desde el editor:
 
 `https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor`
+
+## HardHat
+
+Entorno HardHat, para test y despliegues más estable que Truffle
+
+`yarn add hardhat`
+
+Instalar módulos:
+
+`yarn add @nomiclabs/hardhat-waffle @nomiclabs/hardhat-ethers solidity-coverage ethereum-waffle`
+
+Compilar con HardHat:
+
+`yarn hardhat compile` 
+
+Lanzar test:
+
+`yarn  hardhat test ./testHardhat/Dron.js`
