@@ -7,6 +7,8 @@ const ethers = require('hardhat').ethers;
 
 chai.use(solidity);
 
+// https://www.chaijs.com/api/bdd/#method_equal
+
 describe('Dron', function () {
     
     let contract = null;

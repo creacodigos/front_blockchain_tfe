@@ -5,6 +5,8 @@ const ethers = require('hardhat').ethers;
 
 chai.use(solidity);
 
+// https://www.chaijs.com/api/bdd/#method_equal
+
 describe('Fumigacion', function () {
     
     let accounts = [];
