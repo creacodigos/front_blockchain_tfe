@@ -50,33 +50,33 @@ describe('Dron', function () {
         
         const params = [account,0,2,123,[1]];
         const creacion = contract.CrearDron(...params);
-        await expect(creacion).to.be.revertedWith('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0');
+        await expect(creacion).to.be.revertedWith('VALOR < 0');
       });
       it("MAX >= MIN", async () => {
         
         const params = [account,5,2,123,[1]];
         const creacion = contract.CrearDron(...params);
-        await expect(creacion).to.be.revertedWith('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO');
+        await expect(creacion).to.be.revertedWith('MAX < MIN');
       });
 
       it("COSTE > 0", async () => {
         
         const params = [account,1,2,0,[1]];
         const creacion = contract.CrearDron(...params);
-        await expect(creacion).to.be.revertedWith('EL VALOR DE COSTE DEBE SER MAYOR A 0');
+        await expect(creacion).to.be.revertedWith('VALOR = 0');
       });
 
       it("PESTICIDA.length > 0", async () => {
         
         const params = [account,1,2,123,[]];
         const creacion = contract.CrearDron(...params);
-        await expect(creacion).to.be.revertedWith('EL DRON DEBE CONTENER AL MENOS UN PESTICIDA');
+        await expect(creacion).to.be.revertedWith('SIN PESTICIDA');
       });
 
     });
 
     describe('Configurar Correcto', function () {
-      
+   
       it("Empresa", async () => {
     
         const params = [account,1,2,123,[1,2]];
@@ -135,7 +135,7 @@ describe('Dron', function () {
         const params = [account,1,2,123,[1,2]];
         await contract.CrearDron(...params);
         const result = contract.ConfigurarAltitud(1,15,5);
-        await expect(result).to.be.revertedWith('EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO');
+        await expect(result).to.be.revertedWith('MAX < MIN');
       });
 
       it("Altitud incorrecta MIN 0", async () => {
@@ -143,7 +143,7 @@ describe('Dron', function () {
         const params = [account,1,2,123,[1,2]];
         await contract.CrearDron(...params);
         const result = contract.ConfigurarAltitud(1,0,5);
-        await expect(result).to.be.revertedWith('EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0');
+        await expect(result).to.be.revertedWith('VALOR < 0');
       });
 
       it("Coste igual 0", async () => {
@@ -151,7 +151,7 @@ describe('Dron', function () {
         const params = [account,1,2,123,[1,2]];
         await contract.CrearDron(...params);
         const result = contract.ConfigurarCoste(1,0);
-        await expect(result).to.be.revertedWith('EL COSTE DEBE SER MAYOR A 0');
+        await expect(result).to.be.revertedWith('COSTE = 0');
       });
       
     });
@@ -205,6 +205,26 @@ describe('Dron', function () {
 
       });
 
+      it("Altitud MAX>=P.MAX Y MIN<=P.MIN", async () => {
+        
+        const params = [account,10,20,123,[1,2]];
+        await contract.CrearDron(...params);
+        const result = await contract.ComprobarAltitud(1,1,100);
+        //console.log(result); // Directamente result xq es una query no transacción, es view
+        expect(result).to.be.true;
+
+      });
+
+      it("Altitud MAX<=P.MAX Y MIN>=P.MIN", async () => {
+        
+        const params = [account,10,20,123,[1,2]];
+        await contract.CrearDron(...params);
+        const result = await contract.ComprobarAltitud(1,15,18);
+        //console.log(result); // Directamente result xq es una query no transacción, es view
+        expect(result).to.be.true;
+
+      });
+
       it("Pesticida", async () => {
         
         const params = [account,10,20,123,[1,2]];
@@ -213,7 +233,43 @@ describe('Dron', function () {
         expect(result).to.be.true;
 
       });
-  
+      /*
+      it("Alta pesticida ya estaba", async () => {
+        
+        const params = [account,1,2,123,[1,2]];
+        await contract.CrearDron(...params);
+        const result = await contract.AltaPesticida(1,2);
+        expect(result).to.be.false;
+
+      });
+
+      it("Alta pesticida no estaba", async () => {
+        
+        const params = [account,1,2,123,[1,2]];
+        await contract.CrearDron(...params);
+        const result = await contract.AltaPesticida(1,3);
+        expect(result).to.be.true;
+
+      });
+
+      it("Baja pesticida ya no estaba", async () => {
+        
+        const params = [account,1,2,123,[1,2]];
+        await contract.CrearDron(...params);
+        const result = await contract.BajaPesticida(1,3);
+        expect(result).to.be.false;
+
+      });
+
+      it("Baja pesticida estaba", async () => {
+        
+        const params = [account,1,2,123,[1,2]];
+        await contract.CrearDron(...params);
+        const result = await contract.BajaPesticida(1,2);
+        expect(result).to.be.true;
+
+      });
+      */
 
     });
 

@@ -58,6 +58,9 @@ contract FumigacionContract is Ownable {
     }
 
     function SolicitarFumigacion(uint256 IDDron, uint256 IDParcela) public returns (uint256){
+        
+        require (ComprobarCompatibilidad(IDDron,IDParcela),"EL DRON NO ES COMPATIBLE CON LA PARCELA");
+        
         UltimoID.increment();
         uint256 IDActual = UltimoID.current();
 
