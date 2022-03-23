@@ -78,18 +78,19 @@ contract ParcelaContract is ERC721 {
         return PARCELAS;
     }
 
-    function ComprobarAltitud(uint256 ID, int256 MIN, int256 MAX) public view returns (bool)
+    function ComprobarAltitud(uint256 ID, int256 MIN, int256 MAX) public view returns (bool result)
     {
-        if ((MAX < _Parcelas[ID]._Altitud_MIN) || (MIN > _Parcelas[ID]._Altitud_MAX) || (MIN > MAX)) {
+        int256 DMAX = _Parcelas[ID]._Altitud_MAX;
+        int256 DMIN = _Parcelas[ID]._Altitud_MIN;
+
+        if ((MAX < DMIN) || (MIN > DMAX) || (MIN > MAX)) {
             return false;
         } else {
-            if ((MAX >= _Parcelas[ID]._Altitud_MIN && MAX <= _Parcelas[ID]._Altitud_MAX) || (MIN <= _Parcelas[ID]._Altitud_MAX && MIN >= _Parcelas[ID]._Altitud_MIN)) {
+            if ((MAX >= DMIN && MAX <= DMAX) || (MIN <= DMAX && MIN >= DMIN)) {
                 return true;
             } else {
-                if ((MAX >= _Parcelas[ID]._Altitud_MAX && MIN <= _Parcelas[ID]._Altitud_MIN) || (MAX <= _Parcelas[ID]._Altitud_MAX && MIN >= _Parcelas[ID]._Altitud_MIN)) {
+                if ((MAX >= DMAX && MIN <= DMIN) || (MAX <= DMAX && MIN >= DMIN)) {
                     return true;
-                } else {
-                    return false;
                 }
             }
         }

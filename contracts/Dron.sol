@@ -40,10 +40,10 @@ contract DronContract is ERC721 {
     }
 
     function CrearDron(address EMPRESA, int256 MIN, int256 MAX, uint256 COSTE, TiposContract._Pesticidas[] calldata PESTICIDA) public returns (uint256){
-        require (MIN > 0, "EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0");
-        require (MAX >= MIN, "EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO");
-        require (COSTE > 0, "EL VALOR DE COSTE DEBE SER MAYOR A 0");
-        require (PESTICIDA.length > 0, "EL DRON DEBE CONTENER AL MENOS UN PESTICIDA");
+        require (MIN > 0, "VALOR < 0");
+        require (MAX >= MIN, "MAX < MIN");
+        require (COSTE > 0, "VALOR = 0");
+        require (PESTICIDA.length > 0, "SIN PESTICIDA");
 
         UltimoID.increment();
         uint256 IDActual = UltimoID.current();
@@ -71,8 +71,8 @@ contract DronContract is ERC721 {
 
     function ConfigurarAltitud(uint256 ID, int256 MIN, int256 MAX) public SoloEmpresa(ID) returns (int256, int256)
     {
-        require (MIN > 0, "EL VALOR DE ALTITUD MINIMO DEBE SER MAYOR A 0");
-        require (MAX >= MIN, "EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO");
+        require (MIN > 0, "VALOR < 0");
+        require (MAX >= MIN, "MAX < MIN");
         _Drones[ID]._Altitud_MIN = MIN;
         _Drones[ID]._Altitud_MAX = MAX;
         return (_Drones[ID]._Altitud_MIN, _Drones[ID]._Altitud_MAX);
@@ -80,7 +80,7 @@ contract DronContract is ERC721 {
 
     function ConfigurarCoste(uint256 ID, uint256 COSTE) public SoloEmpresa(ID) returns (bool)
     {
-        require (COSTE > 0, "EL COSTE DEBE SER MAYOR A 0");
+        require (COSTE > 0, "COSTE = 0");
         _Drones[ID]._Coste = COSTE;
         return true;
     }
@@ -95,32 +95,31 @@ contract DronContract is ERC721 {
         return -1;
     }
 
-    function AltaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool)
+    function AltaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool result)
     {
         int key = BuscarPesticida(ID, PESTICIDA);
-        if (key >= 0) {
-            return false;
-        } else {
+        if (key < 0) {
             _Drones[ID]._Pesticidas.push(PESTICIDA);
             return true;
         }
+        return false;
     }
 
     function _QuitarPosicionArray(uint256 ID, uint key) internal {
-        require(key < _Drones[ID]._Pesticidas.length);
-        _Drones[ID]._Pesticidas[key] = _Drones[ID]._Pesticidas[_Drones[ID]._Pesticidas.length-1];
+        Dron memory dron = _Drones[ID];
+        require(key < dron._Pesticidas.length);
+        dron._Pesticidas[key] = dron._Pesticidas[dron._Pesticidas.length-1];
         _Drones[ID]._Pesticidas.pop();
     }
 
-    function BajaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool)
+    function BajaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool result)
     {
         int key = BuscarPesticida(ID, PESTICIDA);
         if (key >= 0) {
             _QuitarPosicionArray(ID, uint(key));
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     function ObtenerInfoDron(uint256 ID) public view returns (Dron memory) {
@@ -131,18 +130,19 @@ contract DronContract is ERC721 {
         return DRONES;
     }
 
-    function ComprobarAltitud(uint256 ID, int256 MIN, int256 MAX) public view returns (bool)
+    function ComprobarAltitud(uint256 ID, int256 MIN, int256 MAX) public view returns (bool result)
     {
-        if ((MAX < _Drones[ID]._Altitud_MIN) || (MIN > _Drones[ID]._Altitud_MAX) || (MIN > MAX)) {
+        int256 DMAX = _Drones[ID]._Altitud_MAX;
+        int256 DMIN = _Drones[ID]._Altitud_MIN;
+
+        if ((MAX < DMIN) || (MIN > DMAX) || (MIN > MAX)) {
             return false;
         } else {
-            if ((MAX >= _Drones[ID]._Altitud_MIN && MAX <= _Drones[ID]._Altitud_MAX) || (MIN <= _Drones[ID]._Altitud_MAX && MIN >= _Drones[ID]._Altitud_MIN)) {
+            if ((MAX >= DMIN && MAX <= DMAX) || (MIN <= DMAX && MIN >= DMIN)) {
                 return true;
             } else {
-                if ((MAX >= _Drones[ID]._Altitud_MAX && MIN <= _Drones[ID]._Altitud_MIN) || (MAX <= _Drones[ID]._Altitud_MAX && MIN >= _Drones[ID]._Altitud_MIN)) {
+                if ((MAX >= DMAX && MIN <= DMIN) || (MAX <= DMAX && MIN >= DMIN)) {
                     return true;
-                } else {
-                    return false;
                 }
             }
         }
