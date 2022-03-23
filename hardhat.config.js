@@ -5,6 +5,7 @@ require('@nomiclabs/hardhat-ethers');
 require('solidity-coverage');
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const INFURA_KEY  = process.env.INFURA_KEY;
 
 const config = {
     paths: {
@@ -31,7 +32,7 @@ const config = {
             url: "http://localhost:8545"
         },
         rinkeby: {
-            url: "https://rinkeby.infura.io/v3/8eef6fb7293d419b81695924050a08e4",
+            url: "https://rinkeby.infura.io/v3/"+INFURA_KEY,
             accounts: [PRIVATE_KEY]
         },
     }
