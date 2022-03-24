@@ -24,8 +24,11 @@
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 require('dotenv').config()
 
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const INFURA_KEY  = process.env.INFURA_KEY;
+
 const PrivateKeyProvider = require("truffle-privatekey-provider");
-const privKeyrinkeby = '23c4a03b9a56645e0b2477ac4807e453b3d16d5253ef9697ed1ded0aaf15a1ea'; // process.env.PRIVATE_KEY;
+const privKeyrinkeby = PRIVATE_KEY;
 
 
 module.exports = {
@@ -65,7 +68,7 @@ module.exports = {
     // NB: It's important to wrap the provider as a function.
 
     rinkeby: {
-      provider: () => new PrivateKeyProvider(privKeyrinkeby, "https://rinkeby.infura.io/v3/" + process.env.INFURA_KEY),
+      provider: () => new PrivateKeyProvider(privKeyrinkeby, "https://rinkeby.infura.io/v3/" + INFURA_KEY),
       network_id: 4,       // Ropsten's id
       gas: 5500000,        // Ropsten has a lower block limit than mainnet
       confirmations: 0,    // # of confs to wait between deployments. (default: 0)

@@ -96,7 +96,7 @@ Para usar el provider con private key de lacuenta de ethereum asociada para el c
 
 Ejecutamos la compilación en rinkeby:
 
-`yarn truffle migrate --network rinkeby (Compila y despliegua contratos en rinkeby)`
+`yarn truffle migrate --network rinkeby` (Compila y despliegua contratos en rinkeby)
 
 Ejecutar Test completos (require tener levantado el nodo el `yarn truffle develop`):
 
