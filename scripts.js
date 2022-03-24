@@ -11,6 +11,10 @@ const walletInfo          = document.querySelector('#wallet_info');
 const contratcsInfo       = document.querySelector('#contratcs_info');
 const buttons             = document.querySelectorAll('button');
 
+let drones = [];
+let parcelas = [];
+let fumigaciones = [];
+
 import ParcelaAbi from './abis/ParcelaContract.js';
 import DronAbi from './abis/DronContract.js';
 import FumiTokenAbi from './abis/FumiTokenContract.js';
@@ -25,10 +29,10 @@ const abis = {
 };
 
 const addresses = {
-    Parcela : '0xd9a03595B208D330F530E413458a26053d6472bd',
-    Dron : '0xd1358d852524c468ADf2a59716F835B2b72352aE',
-    FumiToken : '0x476159a3eE71CF1Ea027583e1136A6acEb145e00',
-    Fumigacion : '0xB9007B1cA5D32b8a173946096CdfFb918eeC6F89'
+    Parcela : '0x4f25241f799C1F7d0a74b6B21f5B7fFbC4ecc83a',
+    Dron : '0x0131B136fEA1bB663eeBE9A54C26C790B49474cA',
+    FumiToken : '0x5fcA4a95D65B57861E2d4887E7ffc4944b2420a9',
+    Fumigacion : '0xe747e4bC3f85c91DE67f0599c210f25dEfc35bFe'
 }
 
 const _Pesticidas = {
@@ -56,6 +60,8 @@ buttons.forEach(button => {
         {
 
             //console.log(inputs);
+            if(pre)
+                pre.innerHTML = ''
 
             let params = [];
             let checkbox = [];
@@ -91,38 +97,6 @@ buttons.forEach(button => {
 ethereumButton.addEventListener('click', () => {
     getAccount();
 });
-/*
-//Sending Ethereum to an address
-sendEthButton.addEventListener('click', () => {
-
-    if(!account)
-    {
-        //window.alert('No hay cuentas');
-        getAccount();
-    }
-    console.log('inputWalletTo.value',inputWalletTo.value);
-    console.log('inputAmount.value',inputAmount.value);
-
-    let params = {
-                    from: ethereum.selectedAddress,
-                    to: inputWalletTo.value,
-                    value: '0x00',
-                    gasPrice: '0x09184e72a000',
-                    gas: '0x2710',
-                };
-    console.table(params);
-
-    ethereum
-        .request({
-        method: 'eth_sendTransaction',
-        params: [ params ],
-
-        })
-        .then((txHash) => console.log(txHash))
-        .catch((error) => console.error);
-});
-*/
-
 
 // Función que verifica si es Metamask
 function isMetamask (){
@@ -145,26 +119,16 @@ async function initMetamask(){
         ethereum = window.ethereum;
         provider = await detectEthereumProvider();
 
-        setWalletInfo();
+        await setWalletInfo();
 
-        ethereum.on('accountsChanged', function (_accounts) {
+        ethereum.on('accountsChanged', async function (_accounts) {
             // Time to reload your interface with accounts[0]!
             accounts = _accounts
             account  = accounts[0];
             showAccount.value = account;
             showAccount_balance.value = account;
-            setWalletInfo();
+            await setWalletInfo();
         });
-
-        if(account)
-        {       }
-            //await sendMethod('FumiToken','decimals');
-            //await sendMethod('Parcela','CrearParcela', [1,2, 2]);
-            //await sendMethod('Parcela','ObtenerInfoParcela', [1]); //(int256 MIN, int256 MAX, _Pesticidas PESTICIDA)
-            //await sendMethod('Parcela','ObtenerInfoParcela', 1);
- 
-
-        //console.log('ethers', ethers);
 
         return true;
     }
@@ -172,7 +136,7 @@ async function initMetamask(){
 
 }
 
-function setWalletInfo(){
+async function setWalletInfo(){
 
     walletInfo.value = JSON.stringify({...ethereum._state, chainId: ethereum.chainId}, null, 2);
     showAccount.value = ethereum?._state?.accounts[0] || null;
@@ -188,9 +152,43 @@ function setWalletInfo(){
         buttonconectado.style.display = 'none';
     }
 
+    console.log('setWalletInfo() - GET info Drones, Parcelas y Fumigaciones');
+    drones = await getDrones();
+    parcelas = await getParcelas();
+    fumigaciones = await getFumigaciones();
+
+    setDrones();
+    setParcelas();
+    setFumigaciones();
+
 }
 
+// Obtenemos los Drones, parcelas y Fumigaciones de los contratos
+async function getDrones(){
 
+    drones = await sendMethod('Dron', 'ObtenerInfoDrones');
+    console.log('getDrones()',drones);
+}
+async function getParcelas(){
+
+    parcelas = await sendMethod('Parcela', 'ObtenerInfoParcelas');
+    console.log('getParcelas()',parcelas);
+}
+async function getFumigaciones(){
+    fumigaciones = await sendMethod('Fumigacion', 'ObtenerInfoFumigaciones');
+    console.log('getFumigaciones()',fumigaciones);
+}
+
+// SETEAMOS EN EL DOM LOS SELECT CON EL LISTADO
+function setDrones(){
+    let select_drones = document.querySelectorAll('.select.drones');
+};
+function setParcelas(){
+    let select_parcelas = document.querySelectorAll('.select.parcelas');
+};
+function setFumigaciones(){
+    let select_fumigaciones = document.querySelectorAll('.select.fumigaciones');
+};
 
 // Función que obtiene la cuenta:
 async function getAccount() {
@@ -198,7 +196,7 @@ async function getAccount() {
     account = accounts[0];
     showAccount.value = account;
     showAccount_balance.value = account;
-    setWalletInfo();
+    await setWalletInfo();
 }
 
 
@@ -211,8 +209,7 @@ async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = 
         //console.log("sendMethod() - ABI - ", abis[contrato].abi);
     
         const ethersProvider = new ethers.providers.Web3Provider(provider);
-        const signer = await ethersProvider.getSigner(account);
-        //value.from, ethers.utils.isAddress(value.from),
+        const signer         = await ethersProvider.getSigner(account);
     
         const Contract = new ethers.Contract(addresses[contrato], abis[contrato].abi, signer);
         //console.log("sendMethod() - contrato: ",Contract);
