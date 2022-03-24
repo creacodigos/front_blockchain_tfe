@@ -541,7 +541,7 @@ export default {
       "outputs": [
         {
           "internalType": "bool",
-          "name": "",
+          "name": "result",
           "type": "bool"
         }
       ],

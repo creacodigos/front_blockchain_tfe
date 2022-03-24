@@ -507,7 +507,7 @@ export default {
       "outputs": [
         {
           "internalType": "bool",
-          "name": "",
+          "name": "result",
           "type": "bool"
         }
       ],
@@ -530,9 +530,9 @@ export default {
       "name": "BajaPesticida",
       "outputs": [
         {
-          "internalType": "int256",
-          "name": "",
-          "type": "int256"
+          "internalType": "bool",
+          "name": "result",
+          "type": "bool"
         }
       ],
       "stateMutability": "nonpayable",
@@ -658,7 +658,7 @@ export default {
       "outputs": [
         {
           "internalType": "bool",
-          "name": "",
+          "name": "result",
           "type": "bool"
         }
       ],
