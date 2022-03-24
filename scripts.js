@@ -26,6 +26,7 @@ const abis = {
     Dron : DronAbi,
     FumiToken : FumiTokenAbi,
     Fumigacion : FumigacionAbi
+    // TODO: Otener TIPS (Perticidas)
 };
 
 const addresses = {
@@ -33,6 +34,7 @@ const addresses = {
     Dron : '0x0131B136fEA1bB663eeBE9A54C26C790B49474cA',
     FumiToken : '0x5fcA4a95D65B57861E2d4887E7ffc4944b2420a9',
     Fumigacion : '0xe747e4bC3f85c91DE67f0599c210f25dEfc35bFe'
+    // TODO: Otener TIPS (Perticidas)
 }
 
 const _Pesticidas = {
@@ -156,6 +158,7 @@ async function setWalletInfo(){
     drones = await getDrones();
     parcelas = await getParcelas();
     fumigaciones = await getFumigaciones();
+    // TODO: Otener TIPS (Perticidas)
 
     setDrones();
     setParcelas();
