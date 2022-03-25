@@ -9,7 +9,7 @@ contract FumiTokenContract is ERC20, Ownable {
 
     constructor() ERC20("FumiToken", "FMTKN") {
     }
-    
+
     function mint(address to, uint256 amount)
         public
         onlyOwner

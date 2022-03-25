@@ -1,6 +1,5 @@
 //SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.0; 
-
+pragma solidity ^0.8.0;
 //Importamos
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
@@ -14,7 +13,7 @@ contract DronContract is ERC721 {
     //Creamos las variables propias del contrato
     struct Dron {
         uint256 _ID;
-        address _Empresa; 
+        address _Empresa;
         int256 _Altitud_MIN;
         int256 _Altitud_MAX;
         uint256 _Coste;
@@ -29,17 +28,18 @@ contract DronContract is ERC721 {
 
     //Modificador de permisos de acceso
     modifier SoloPropietario(uint256 ID){
-        require(msg.sender == ownerOf(ID));
+        require(msg.sender == ownerOf(ID), "NO PROPIETARIO");
         _;
     }
 
     //Modificador de permisos de acceso
     modifier SoloEmpresa(uint256 ID){
-        require(msg.sender == _Drones[ID]._Empresa || msg.sender == ownerOf(ID));
+        require(msg.sender == _Drones[ID]._Empresa || msg.sender == ownerOf(ID), "NO EMPRESA");
         _;
     }
 
-    function CrearDron(address EMPRESA, int256 MIN, int256 MAX, uint256 COSTE, TiposContract._Pesticidas[] calldata PESTICIDA) public returns (uint256){
+    function CrearDron(address EMPRESA, int256 MIN, int256 MAX, uint256 COSTE, TiposContract._Pesticidas[] calldata PESTICIDA)
+     public returns (uint256){
         require (MIN > 0, "VALOR < 0");
         require (MAX >= MIN, "MAX < MIN");
         require (COSTE > 0, "VALOR = 0");
@@ -54,7 +54,7 @@ contract DronContract is ERC721 {
             _Altitud_MIN: MIN,
             _Altitud_MAX: MAX,
             _Coste: COSTE,
-            _Pesticidas: PESTICIDA            
+            _Pesticidas: PESTICIDA
         });
 
         _Drones[IDActual] = Dron_;
@@ -115,8 +115,8 @@ contract DronContract is ERC721 {
 
     function _QuitarPosicionArray(uint256 ID, uint key) internal {
         Dron memory dron = _Drones[ID];
-        require(key < dron._Pesticidas.length);
-        dron._Pesticidas[key] = dron._Pesticidas[dron._Pesticidas.length-1];
+        require(key < dron._Pesticidas.length, "PESTICIDA VACIO");
+        _Drones[ID]._Pesticidas[key] = dron._Pesticidas[dron._Pesticidas.length-1];
         _Drones[ID]._Pesticidas.pop();
         DRONES[ID-1]._Pesticidas.pop();
     }
@@ -135,7 +135,7 @@ contract DronContract is ERC721 {
         return _Drones[ID];
     }
 
-    function ObtenerInfoDrones() public view returns (Dron [] memory) {
+    function ObtenerInfoDrones() public view returns (Dron[] memory) {
         return DRONES;
     }
 

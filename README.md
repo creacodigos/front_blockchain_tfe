@@ -131,3 +131,63 @@ Compilar con HardHat:
 Lanzar test:
 
 `yarn  hardhat test ./testHardhat/Dron.js`
+
+
+------
+# HERRAMIENTAS UTILIZADAS
+
+## Contratos y utilidades de
+
+- openZeppelin
+- ethers (front)
+- metamask (front)
+- node.js
+- Remix
+## TESTs
+
+- Remix (e2e)
+- Truffle (unitarios)
+- Hardhat (unitarios)
+- Metamask (Control de redes y wallets correctas y conectadas)
+- Truffle Coverage tenía un comportamiento anómalo.
+- HardHat Coverage
+
+## Linter para verificar código y por seguridad:
+
+- Solium
+- Solhint
+- Remix
+
+## Extensiones con ayudas, lintern y verificación de código estático:
+
+- Solidity
+- Solidity Visual Developer
+
+## Gráficos y Diagramas con la extensión:
+
+Solidity Visual Developer:
+- Surya
+- UML
+- PlantUML
+- Inheritance. Genera un gráfico en formato DOT con el árbol de herencia.
+- Parse. Genera un árbol con los objetos AST.)
+- `PENDIENTE` mythril > https://github.com/ConsenSys/mythril
+
+## Documentación
+
+Grupo de tres personas: debe incluir :
+
+- Diagrama de despliegue (Raro como ejemplo del trabajo de Juan Luis)
+- Diagrama de casos de uso (Tipo sencillo describiendo como se usa la plataforma y por donde pasan la info, transacciones, etc..)
+```
+sequenceDiagram
+    Alice->>+John: Hello John, how are you?
+    Alice->>+John: John, can you hear me?
+    John-->>-Alice: Hi Alice, I can hear you!
+    John-->>-Alice: I feel great!
+```
+- Diagrama de clases (gigantesco llamado GRAPH)
+- Diagrama de secuencia (Ejemplo del trabajo presentado con Juan Luis (artifacts)
+
+# PENDIENTE
+- Análisis de seguridad de la solución desarrollada.

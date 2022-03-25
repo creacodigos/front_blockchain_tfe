@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.0; 
+pragma solidity ^0.8.0;
 
 //Importamos
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -29,7 +29,7 @@ contract ParcelaContract is ERC721 {
 
     //Modificador de permisos de acceso
     modifier SoloPropietario(uint256 ID){
-        require(msg.sender == ownerOf(ID));
+        require(msg.sender == ownerOf(ID), "NO PROPIETARIO");
         _;
     }
 
@@ -77,7 +77,7 @@ contract ParcelaContract is ERC721 {
         return _Parcelas[ID];
     }
 
-    function ObtenerInfoParcelas() public view returns (Parcela [] memory) {
+    function ObtenerInfoParcelas() public view returns (Parcela[] memory) {
         return PARCELAS;
     }
 

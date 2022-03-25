@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.0; 
+pragma solidity ^0.8.0;
 
 //Importamos
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -59,9 +59,8 @@ contract FumigacionContract is Ownable {
     }
 
     function SolicitarFumigacion(uint256 IDDron, uint256 IDParcela) public returns (uint256){
-        
+
         require (ComprobarCompatibilidad(IDDron,IDParcela),"EL DRON NO ES COMPATIBLE CON LA PARCELA");
-        
         UltimoID.increment();
         uint256 IDActual = UltimoID.current();
 
@@ -88,7 +87,7 @@ contract FumigacionContract is Ownable {
 
         bool DronAltitud_ = _Dron.ComprobarAltitud(IDDron,Parcela_._Altitud_MIN,Parcela_._Altitud_MAX);
         require (DronAltitud_, "EL DRON NO PUEDE TRABAJAR A LA ALTITUD REQUERIDA");
-        
+
         return true;
     }
 
@@ -99,7 +98,7 @@ contract FumigacionContract is Ownable {
         ParcelaContract.Parcela memory Parcela_ = _Parcela.ObtenerInfoParcela(_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._IDParcela);
 
         require (msg.sender == Parcela_._Owner, "Solo el propietario de la parcela puede pagar");
-        
+
         //realizar transferencia
         if (_FumiToken.transferFrom(Parcela_._Owner, Dron_._Empresa, Dron_._Coste)) {
             _Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._Pagada = true;
@@ -111,7 +110,7 @@ contract FumigacionContract is Ownable {
         return _Solicitudes_Fumigacion[ID];
     }
 
-    function ObtenerInfoFumigaciones() public view returns (Solicitud_Fumigacion [] memory) {
+    function ObtenerInfoFumigaciones() public view returns (Solicitud_Fumigacion[] memory) {
         return FUMIGACIONES;
     }
 }
