@@ -32,10 +32,10 @@ const abis = {
 };
 
 const addresses = {
-    Parcela : '0x4f25241f799C1F7d0a74b6B21f5B7fFbC4ecc83a',
-    Dron : '0x0131B136fEA1bB663eeBE9A54C26C790B49474cA',
-    FumiToken : '0x5fcA4a95D65B57861E2d4887E7ffc4944b2420a9',
-    Fumigacion : '0xe747e4bC3f85c91DE67f0599c210f25dEfc35bFe'
+    Parcela : '0x9b560f2340CD502B9DD6EB37D6fc53e225cae483',
+    Dron : '0x57fb7C58B56B2f0a08616C7973FB63E60297B855',
+    FumiToken : '0x172989F2F4efAcB3FF638ac29C11387784626500',
+    Fumigacion : '0x805fa61D2421c1AdB02E52Bf570fd83d54B55525'
 }
 
 const Pesticidas = [
@@ -268,12 +268,48 @@ async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = 
 
     try {
         //console.log("sendMethod() - ABI - ", abis[contrato].abi);
-    
+
+        account = ethereum?._state?.accounts[0] || null;
+
+        if(account == null)
+        {
+            window.alert("No tienes cuenta vinculada");
+            return false;
+        }
+
         const ethersProvider = new ethers.providers.Web3Provider(provider);
-        const signer         = await ethersProvider.getSigner(account);
-    
-        const Contract = new ethers.Contract(addresses[contrato], abis[contrato].abi, signer);
-        //console.log("sendMethod() - contrato: ",Contract);
+        const signer         = await ethersProvider.getSigner(account); 
+        const Contract       = new ethers.Contract(addresses[contrato], abis[contrato].abi, signer);
+
+        if(metodo == 'PagarFumigacion')
+        {
+            console.log("addresses['FumiToken']",addresses['FumiToken']);
+            console.log("abis['FumiToken'].abi",abis['FumiToken'].abi);
+            console.log("account",account);
+
+            let infoFumigacion = await Contract.ObtenerInfoFumigacion(...params);
+            console.log("infoFumigacion",infoFumigacion);
+
+            const ContractD = new ethers.Contract(addresses['Dron'], abis['Dron'].abi, signer);
+            const dron = await ContractD.ObtenerInfoDron(infoFumigacion._IDDron);
+            console.log("dron",dron);
+
+            const ContractP = new ethers.Contract(addresses['Parcela'], abis['Parcela'].abi, signer);
+            const parcela = await ContractP.ObtenerInfoParcela(infoFumigacion._IDParcela);
+            console.log("parcela",parcela);
+
+            if(parcela?._Owner?.toLowerCase() != account?.toLowerCase())
+            {
+                window.alert("LAS CUENTAS NO COINCIDEN\nEstás conectado con: "+account+"\nDebes conectarte con: "+parcela?._Owner);
+                return false;
+            }
+
+            const ContractFT = new ethers.Contract(addresses['FumiToken'], abis['FumiToken'].abi, signer);
+            const approve = await ContractFT.approve(addresses['Fumigacion'],dron._Coste);
+            console.log('approve', approve);
+
+        }
+
         let respuesta = await Contract[metodo](...params); //1 ,2 ,4 , 'lo que sea'
         console.log("sendMethod() - Contract."+metodo+"(): ",respuesta);
 
@@ -373,12 +409,15 @@ async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = 
         {
             respuesta = respuesta?._hex == '0x00' ? 'Coincide' : 'NO Coincide';
         }
-        
+
         console.table(respuesta);
     
         return respuesta;
 
     } catch (error) {
+
+        if(error?.message)
+            console.log('ERROR',error?.message);
 
         console.error("sendMethod() - error: ",error);
         return error;
