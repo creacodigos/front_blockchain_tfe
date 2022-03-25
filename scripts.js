@@ -6,6 +6,8 @@ let provider = null;
 const ethereumButton      = document.querySelector('.enableEthereumButton');
 const buttonconectado     = document.querySelector('.buttonconectado');
 const buttonErrorRed      = document.querySelector('.buttonErrorRed');
+const buttonActualizar      = document.querySelector('.buttonActualizar');
+
 const showAccount         = document.querySelector('#showAccount');
 const showAccount_balance = document.querySelector('#showAccount_balance');
 const walletInfo          = document.querySelector('#wallet_info');
@@ -107,6 +109,12 @@ buttons.forEach(button => {
 ethereumButton.addEventListener('click', () => {
     getAccount();
 });
+buttonActualizar.addEventListener('click', () => {
+    getSelects();
+    setWalletInfo();
+});
+
+
 
 // Función que verifica si es Metamask
 function isMetamask (){
@@ -171,13 +179,8 @@ async function setWalletInfo(){
 
     if(correctChainId)
     {
-        
         console.log('setWalletInfo() - GET info Drones, Parcelas y Fumigaciones');
-        drones = await getDrones();
-        parcelas = await getParcelas();
-        fumigaciones = await getFumigaciones();
-        pesticidas = getPesticidas();
-
+        await getSelects();
     }
 
 }
@@ -198,6 +201,14 @@ function checkChainId(chainId)
     
     return true;
 }
+
+async function getSelects(){
+
+    drones       = await getDrones();
+    parcelas     = await getParcelas();
+    fumigaciones = await getFumigaciones();
+    pesticidas   = getPesticidas();
+} 
 
 // Obtenemos los Drones, parcelas y Fumigaciones de los contratos
 async function getDrones(){
