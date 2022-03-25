@@ -75,6 +75,8 @@ contract DronContract is ERC721 {
         require (MAX >= MIN, "MAX < MIN");
         _Drones[ID]._Altitud_MIN = MIN;
         _Drones[ID]._Altitud_MAX = MAX;
+        DRONES[ID]._Altitud_MIN = MIN;
+        DRONES[ID]._Altitud_MAX = MAX;
         return (_Drones[ID]._Altitud_MIN, _Drones[ID]._Altitud_MAX);
     }
 
