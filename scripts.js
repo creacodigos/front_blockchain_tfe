@@ -5,15 +5,18 @@ let provider = null;
 
 const ethereumButton      = document.querySelector('.enableEthereumButton');
 const buttonconectado     = document.querySelector('.buttonconectado');
+const buttonErrorRed      = document.querySelector('.buttonErrorRed');
 const showAccount         = document.querySelector('#showAccount');
 const showAccount_balance = document.querySelector('#showAccount_balance');
 const walletInfo          = document.querySelector('#wallet_info');
 const contratcsInfo       = document.querySelector('#contratcs_info');
 const buttons             = document.querySelectorAll('button');
+const forms               = document.querySelectorAll('section#infos > section');
 
 let drones = [];
 let parcelas = [];
 let fumigaciones = [];
+let pesticidas = [];
 
 import ParcelaAbi from './abis/ParcelaContract.js';
 import DronAbi from './abis/DronContract.js';
@@ -26,7 +29,6 @@ const abis = {
     Dron : DronAbi,
     FumiToken : FumiTokenAbi,
     Fumigacion : FumigacionAbi
-    // TODO: Otener TIPS (Perticidas)
 };
 
 const addresses = {
@@ -34,15 +36,21 @@ const addresses = {
     Dron : '0x0131B136fEA1bB663eeBE9A54C26C790B49474cA',
     FumiToken : '0x5fcA4a95D65B57861E2d4887E7ffc4944b2420a9',
     Fumigacion : '0xe747e4bC3f85c91DE67f0599c210f25dEfc35bFe'
-    // TODO: Otener TIPS (Perticidas)
 }
 
-const _Pesticidas = {
-    Pesticida_A: 0,
-    Pesticida_B: 1,
-    Pesticida_C: 2,
-    Pesticida_D: 3,
-    Pesticida_E: 4
+const Pesticidas = [
+    'Pesticida_A',
+    'Pesticida_B',
+    'Pesticida_C',
+    'Pesticida_D',
+    'Pesticida_E'
+];
+
+let lista = {
+    drones: [],
+    parcelas: [],
+    fumigaciones: [],
+    pesticidas: Pesticidas
 }
 
 // Listener de botones
@@ -132,6 +140,11 @@ async function initMetamask(){
             await setWalletInfo();
         });
 
+        ethereum.on('chainChanged', (chainId) => {
+            window.location.reload();
+        });
+          
+
         return true;
     }
     return false;
@@ -154,44 +167,89 @@ async function setWalletInfo(){
         buttonconectado.style.display = 'none';
     }
 
-    console.log('setWalletInfo() - GET info Drones, Parcelas y Fumigaciones');
-    drones = await getDrones();
-    parcelas = await getParcelas();
-    fumigaciones = await getFumigaciones();
-    // TODO: Otener TIPS (Perticidas)
+    let correctChainId = checkChainId(ethereum.chainId);
 
-    setDrones();
-    setParcelas();
-    setFumigaciones();
+    if(correctChainId)
+    {
+        
+        console.log('setWalletInfo() - GET info Drones, Parcelas y Fumigaciones');
+        drones = await getDrones();
+        parcelas = await getParcelas();
+        fumigaciones = await getFumigaciones();
+        pesticidas = getPesticidas();
 
+    }
+
+}
+
+function checkChainId(chainId)
+{
+    if(chainId != '0x4')
+    {
+        console.log('chainId',chainId);
+        buttonErrorRed.style.display = 'inline-block';
+        return false;
+    }
+    
+    forms?.forEach(form => {
+        form.style.display = 'block';
+    })
+    buttonErrorRed.style.display = 'none';
+    
+    return true;
 }
 
 // Obtenemos los Drones, parcelas y Fumigaciones de los contratos
 async function getDrones(){
 
-    drones = await sendMethod('Dron', 'ObtenerInfoDrones');
-    console.log('getDrones()',drones);
+    lista.drones = await sendMethod('Dron', 'ObtenerInfoDrones');
+    console.log('getDrones()',lista.drones);
+    setSelects('drones');
 }
 async function getParcelas(){
 
-    parcelas = await sendMethod('Parcela', 'ObtenerInfoParcelas');
-    console.log('getParcelas()',parcelas);
+    lista.parcelas = await sendMethod('Parcela', 'ObtenerInfoParcelas');
+    console.log('getParcelas()',lista.parcelas);
+    setSelects('parcelas');
 }
 async function getFumigaciones(){
-    fumigaciones = await sendMethod('Fumigacion', 'ObtenerInfoFumigaciones');
-    console.log('getFumigaciones()',fumigaciones);
+    lista.fumigaciones = await sendMethod('Fumigacion', 'ObtenerInfoFumigaciones');
+    console.log('getFumigaciones()',lista.fumigaciones);
+    setSelects('fumigaciones');
+}
+function getPesticidas(){
+    lista.pesticidas = Pesticidas;
+    console.log('getPesticidas()',lista.pesticidas);
+    setSelects('pesticidas');
 }
 
 // SETEAMOS EN EL DOM LOS SELECT CON EL LISTADO
-function setDrones(){
-    let select_drones = document.querySelectorAll('.select.drones');
-};
-function setParcelas(){
-    let select_parcelas = document.querySelectorAll('.select.parcelas');
-};
-function setFumigaciones(){
-    let select_fumigaciones = document.querySelectorAll('.select.fumigaciones');
-};
+function setSelects(tipo){
+
+    let selects = document.querySelectorAll('select.'+tipo);
+    if(selects)
+    {
+
+        console.log(tipo, lista[tipo]);
+        let size = lista[tipo]?.length;
+        selects?.forEach(select => {
+            for (var i = 0; i < size; i++){
+                if(tipo == 'drones')
+                    select.options[i] = new Option(lista[tipo][i]?._ID+' - ALT MIN: '+ lista[tipo][i]?._Altitud_MIN+' - ALT MAX: '+ lista[tipo][i]?._Altitud_MAX+' - COSTE: '+ lista[tipo][i]?._Coste+'€'+' - Pesticidas: '+ lista[tipo][i]?._Pesticidas, (i+1)); // text , value
+                else if(tipo == 'parcelas')
+                    select.options[i] = new Option(lista[tipo][i]?._ID+' - ALT MIN: '+ lista[tipo][i]?._Altitud_MIN+' - ALT MAX: '+ lista[tipo][i]?._Altitud_MAX+' - Pesticida: '+ lista[tipo][i]?._Pesticida, (i+1)); // text , value
+                else if(tipo == 'fumigaciones')
+                    select.options[i] = new Option(lista[tipo][i]?._ID+' - PARCELA: '+ lista[tipo][i]?._IDParcela+' - DRON: '+ lista[tipo][i]?._IDDron+' - Pagada: '+ lista[tipo][i]?._Pagada+' - Finalizada: '+ lista[tipo][i]?._Finalizada, (i+1)); // text , value
+                else
+                    select.options[i] = new Option((i+1)+' - '+lista[tipo][i], (i+1)); // text , value
+            }
+
+        })
+    }
+    else
+
+        console.log('NO EXISTE ', lista[tipo]);
+}
 
 // Función que obtiene la cuenta:
 async function getAccount() {
@@ -311,8 +369,11 @@ async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = 
             })
             respuesta = format;
         }
+        else if(metodo == 'BuscarPesticida')
+        {
+            respuesta = respuesta?._hex == '0x00' ? 'Coincide' : 'NO Coincide';
+        }
         
-
         console.table(respuesta);
     
         return respuesta;

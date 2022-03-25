@@ -57,6 +57,10 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: .8rem;
         }
+        button.buttonErrorRed,
+        section#infos > section{
+            display: none;
+        }
         pre{
             background-color: #FAFAFA;
             margin: 1rem 0;
@@ -85,6 +89,22 @@
         #infos, #drones, #parcelas, #fumigaciones, #tokens {
             padding-top: 5rem;
         }
+        button{
+            border: none !important;
+            padding: .5rem 1rem !important;
+        }
+        button.actualizar{
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            border: none;
+            border-radius: 1rem;
+            padding: 1rem;
+            color: white;
+            background-color: green;
+            font-size: .9rem;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -102,12 +122,14 @@
         </nav>
     </header>
     <section class="container " id="infos">
+
         <img src="./img/Metamask.svg" height="50" class="mx-3">
         <button class="btn btn-primary enableEthereumButton">Conectar con Metamask</button>
         <button class="btn btn-success buttonconectado">Conectado</button>
+        <button class="btn btn-danger buttonErrorRed">Debes estar en la red Rinkeby de Ethereum</button>
+        <button class="actualizar" onclick="window.location.reload()">ACTUALIZAR</button>
         
         <form action="">
-
             <div class="mb-3">
                 <label for="showAccount" class="form-label text-bold"><strong>Cuenta conectada con Metamask</strong></label>
                 <input type="text" class="form-control" id="showAccount" readonly >
@@ -121,28 +143,6 @@
                 <textarea id="contratcs_info" class="form-control" rows="6"></textarea>
             </div>
         </form>
-        <!--
-        <section class="">
-            <h4>
-                Send transaction:
-            </h4>
-            <form action="">
-                <div class="mb-3">
-                    <label for="wallet_to" class="form-label">Wallet To</label>
-                    <input type="text" class="form-control" id="wallet_to" placeholder="0x4B87e2d65FaCF3e16Aa99a6704aa99c666539a56"
-                    value="0x4B87e2d65FaCF3e16Aa99a6704aa99c666539a56"
-                    >
-                </div>
-                <div class="mb-3">
-                    <label for="amount" class="form-label">Amount</label>
-                    <input type="number" class="form-control" id="amount" placeholder="0.0056" value="0.0005">
-                </div>
-            </form>
-
-            <button class="sendEthButton btn btn-secondary">Send Eth</button>
-
-        </section>
-        -->
 <!-- DRON -->
         <section class="dron" id="drones">
             <h4>
@@ -210,11 +210,7 @@
             <form action="" class="form_dron_congifurar_empresa">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
-                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
-                        <option selected>Seleccionar Dron</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select drones drones" id="select_dron" aria-label="Seleccionar Dron">
                     </select>
                 </div>
                 <div class="mb-3">
@@ -233,11 +229,7 @@
             <form action="" class="form_dron_congifurar_altitud">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
-                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
-                        <option selected>Seleccionar Dron</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select drones" id="select_dron" aria-label="Seleccionar Dron">
                     </select>
                 </div>
                 <div class="mb-3">
@@ -259,11 +251,7 @@
             <form action="" class="form_dron_congifurar_coste">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
-                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
-                        <option selected>Seleccionar Dron</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select drones" id="select_dron" aria-label="Seleccionar Dron">
                     </select>
                 </div>
                 <div class="mb-3">
@@ -281,21 +269,14 @@
             <form action="" class="form_dron_buscar_persticida">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
-                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
-                        <option selected>Seleccionar Dron</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select drones" id="select_dron" aria-label="Seleccionar Dron">
                     </select>
                 </div>
-                <select class="form-select" id="perticida" aria-label="Seleccionar Pesticida">
-                    <option selected>Seleccionar Pesticida</option>
-                    <option value="1">Pesticida A</option>
-                    <option value="2">Pesticida B</option>
-                    <option value="3">Pesticida C</option>
-                    <option value="4">Pesticida D</option>
-                    <option value="5">Pesticida E</option>
-                </select>
+                <div class="mb-3">
+                    <label for="pesticida" class="form-label">Pesticida</label>
+                    <select class="form-select pesticidas" id="pesticida" aria-label="Seleccionar Pesticida">
+                    </select>
+                </div>
             </form>
             <button class="btn btn-secondary" form="form_dron_buscar_persticida" contract="Dron" method="BuscarPesticida">Buscar Pesticida</button>
             <pre class="form_dron_buscar_persticida"></pre>
@@ -307,22 +288,12 @@
             <form action="" class="form_dron_alta_pesticida">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
-                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
-                        <option selected>Seleccionar Dron</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select drones" id="select_dron" aria-label="Seleccionar Dron">
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="desticida" class="form-label">Pesticida</label>
-                    <select class="form-select" id="perticida" aria-label="Seleccionar Pesticida">
-                        <option selected>Seleccionar Pesticida</option>
-                        <option value="1">Pesticida A</option>
-                        <option value="2">Pesticida B</option>
-                        <option value="3">Pesticida C</option>
-                        <option value="4">Pesticida D</option>
-                        <option value="5">Pesticida E</option>
+                    <select class="form-select pesticidas" id="pesticida" aria-label="Seleccionar Pesticida">
                     </select>
                 </div>
             </form>
@@ -336,22 +307,12 @@
             <form action="" class="form_dron_baja_pesticida">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
-                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
-                        <option selected>Seleccionar Dron</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select drones" id="select_dron" aria-label="Seleccionar Dron">
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="desticida" class="form-label">Pesticida</label>
-                    <select class="form-select" id="perticida" aria-label="Seleccionar Pesticida">
-                        <option selected>Seleccionar Pesticida</option>
-                        <option value="1">Pesticida A</option>
-                        <option value="2">Pesticida B</option>
-                        <option value="3">Pesticida C</option>
-                        <option value="4">Pesticida D</option>
-                        <option value="5">Pesticida E</option>
+                    <select class="form-select pesticidas" id="pesticida" aria-label="Seleccionar Pesticida">
                     </select>
                 </div>
             </form>
@@ -365,11 +326,7 @@
             <form action="" class="form_dron_obtener_dron">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
-                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
-                        <option selected>Seleccionar Dron</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select drones" id="select_dron" aria-label="Seleccionar Dron">
                     </select>
                 </div>
             </form>
@@ -400,13 +357,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="coste" class="form-label">Pesticidas</label>
-                    <select class="form-select" id="perticida" aria-label="Seleccionar Pesticida">
-                        <option selected>Seleccionar Pesticida</option>
-                        <option value="1">Pesticida A</option>
-                        <option value="2">Pesticida B</option>
-                        <option value="3">Pesticida C</option>
-                        <option value="4">Pesticida D</option>
-                        <option value="5">Pesticida E</option>
+                    <select class="form-select pesticidas" id="pesticida" aria-label="Seleccionar Pesticida">
                     </select>
                 </div>
             </form>
@@ -421,11 +372,7 @@
             <form action="" class="form_parcela_congifurar_altitud">
                 <div class="mb-3">
                     <label for="select_parcela" class="form-label">Parcela</label>
-                    <select class="form-select" id="select_parcela" aria-label="Seleccionar Parcela">
-                        <option selected>Seleccionar Parcela</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select parcelas" id="select_parcela" aria-label="Seleccionar Parcela">
                     </select>
                 </div>
                 <div class="mb-3">
@@ -448,21 +395,14 @@
             <form action="" class="form_parcela_configurar_pesticida">
                 <div class="mb-3">
                     <label for="select_parcela" class="form-label">Parcela</label>
-                    <select class="form-select" id="select_parcela" aria-label="Seleccionar Parcela">
-                        <option selected>Seleccionar Parcela</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select parcelas" id="select_parcela" aria-label="Seleccionar Parcela">
                     </select>
                 </div>
-                <select class="form-select" id="perticida" aria-label="Seleccionar Pesticida">
-                    <option selected>Seleccionar Pesticida</option>
-                    <option value="1">Pesticida A</option>
-                    <option value="2">Pesticida B</option>
-                    <option value="3">Pesticida C</option>
-                    <option value="4">Pesticida D</option>
-                    <option value="5">Pesticida E</option>
-                </select>
+                <div class="mb-3">
+                    <label for="pesticida" class="form-label">Parcela</label>
+                    <select class="form-select pesticidas" id="pesticida" aria-label="Seleccionar Pesticida">
+                    </select>
+                </div>
             </form>
             <button class="btn btn-secondary" form="form_parcela_configurar_pesticida" contract="Parcela" method="ConfigurarPesticida">Configurar Pesticida</button>
             <pre class="form_parcela_configurar_pesticida"></pre>
@@ -474,11 +414,7 @@
             <form action="" class="form_parcela_info_parcela">
                 <div class="mb-3">
                     <label for="select_parcela" class="form-label">Parcela</label>
-                    <select class="form-select" id="select_parcela" aria-label="Seleccionar Parcela">
-                        <option selected>Seleccionar Parcela</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select parcelas" id="select_parcela" aria-label="Seleccionar Parcela">
                     </select>
                 </div>
             </form>
@@ -501,20 +437,12 @@
             <form action="" class="form_crear_fumigacion">
                 <div class="mb-3">
                     <label for="select_dron" class="form-label">Dron</label>
-                    <select class="form-select" id="select_dron" aria-label="Seleccionar Dron">
-                        <option selected>Seleccionar Dron</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select drones" id="select_dron" aria-label="Seleccionar Dron">
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="select_parcela" class="form-label">Parcela</label>
-                    <select class="form-select" id="select_parcela" aria-label="Seleccionar Parcela">
-                        <option selected>Seleccionar Parcela</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select parcelas" id="select_parcela" aria-label="Seleccionar Parcela">
                     </select>
                 </div>
             </form>
@@ -528,11 +456,7 @@
             <form action="" class="form_pagar_fumigacion">
                 <div class="mb-3">
                     <label for="select_fumigacion" class="form-label">Fumigación</label>
-                    <select class="form-select" id="select_fumigacion" aria-label="Seleccionar Fumigación">
-                        <option selected>Seleccionar Fumigación</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select fumigaciones" id="select_fumigacion" aria-label="Seleccionar Fumigación">
                     </select>
                 </div>
             </form>
@@ -549,11 +473,7 @@
             <form action="" class="form_realizar_fumigacion">
                 <div class="mb-3">
                     <label for="select_fumigacion" class="form-label">Fumigación</label>
-                    <select class="form-select" id="select_fumigacion" aria-label="Seleccionar Fumigación">
-                        <option selected>Seleccionar Fumigación</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select fumigaciones" id="select_fumigacion" aria-label="Seleccionar Fumigación">
                     </select>
                 </div>
             </form>
@@ -568,11 +488,7 @@
             <form action="" class="form_fumigacion_info_fumigacion">
                 <div class="mb-3">
                     <label for="select_fumigacion" class="form-label">Fumigacion</label>
-                    <select class="form-select" id="select_fumigacion" aria-label="Seleccionar Fumigacion">
-                        <option selected>Seleccionar Fumigacion</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select fumigaciones" id="select_fumigacion" aria-label="Seleccionar Fumigacion">
                     </select>
                 </div>
             </form>
