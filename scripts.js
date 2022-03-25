@@ -32,10 +32,10 @@ const abis = {
 };
 
 const addresses = {
-    Parcela : '0xDAFdF7668904fcb4176c5F62156A56c2De62B617',
-    Dron : '0xe9BBA7406014ac5bBB503B816217906cce90058B',
-    FumiToken : '0x7414D111A72f89C36d177Cb9f90308831BD8CD22',
-    Fumigacion : '0x6CaC345b9E24b47c269e489656B1803CD53bE1D4'
+    Parcela : '0xE60197Cf81c10c56784a1B4f8C868c34eA393915',
+    Dron : '0xfd89142e3B439dC8C3E37Dab015459012A883eeF',
+    FumiToken : '0xDDC673eFfe1DBE88E7d2F07e57999f17622dfE27',
+    Fumigacion : '0x32293Ab765C6440a59172e53F63cc574282eac0B'
 }
 
 const Pesticidas = [
@@ -241,7 +241,7 @@ function setSelects(tipo){
                 else if(tipo == 'fumigaciones')
                     select.options[i] = new Option(lista[tipo][i]?._ID+' - PARCELA: '+ lista[tipo][i]?._IDParcela+' - DRON: '+ lista[tipo][i]?._IDDron+' - Pagada: '+ lista[tipo][i]?._Pagada+' - Finalizada: '+ lista[tipo][i]?._Finalizada, (i+1)); // text , value
                 else
-                    select.options[i] = new Option((i+1)+' - '+lista[tipo][i], (i+1)); // text , value
+                    select.options[i] = new Option((i)+' - '+lista[tipo][i], (i)); // text , value
             }
 
         })

@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">96.36% </span>
+        <span class="strong">96.72% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>53/55</span>
+        <span class='fraction'>59/61</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">82.35% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>15/15</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">96.49% </span>
+        <span class="strong">96.83% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>55/57</span>
+        <span class='fraction'>61/63</span>
       </div>
     </div>
   </div>
@@ -202,7 +202,16 @@
 157
 158
 159
-160</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -271,12 +280,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -285,6 +300,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -305,11 +321,13 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -429,6 +447,7 @@ contract DronContract is ERC721 {
     function ConfigurarEmpresa(uint256 ID, address EMPRESA) public SoloPropietario(ID) returns (bool)
     {
         _Drones[ID]._Empresa = EMPRESA;
+        DRONES[ID-1]._Empresa = EMPRESA;
         return true;
     }
 &nbsp;
@@ -436,8 +455,13 @@ contract DronContract is ERC721 {
     {
         require (MIN &gt; 0, "VALOR &lt; 0");
         require (MAX &gt;= MIN, "MAX &lt; MIN");
+&nbsp;
+        // uint256 IDd;
+        // IDd = ID - 1;
         _Drones[ID]._Altitud_MIN = MIN;
         _Drones[ID]._Altitud_MAX = MAX;
+        DRONES[ID - 1]._Altitud_MIN = MIN;
+        DRONES[ID - 1]._Altitud_MAX = MAX;
         return (_Drones[ID]._Altitud_MIN, _Drones[ID]._Altitud_MAX);
     }
 &nbsp;
@@ -445,6 +469,7 @@ contract DronContract is ERC721 {
     {
         require (COSTE &gt; 0, "COSTE = 0");
         _Drones[ID]._Coste = COSTE;
+        DRONES[ID-1]._Coste = COSTE;
         return true;
     }
 &nbsp;
@@ -463,6 +488,7 @@ contract DronContract is ERC721 {
         int key = BuscarPesticida(ID, PESTICIDA);
         <span class="missing-if-branch" title="else path not taken" >E</span>if (key &lt; 0) {
             _Drones[ID]._Pesticidas.push(PESTICIDA);
+            DRONES[ID-1]._Pesticidas.push(PESTICIDA);
             return true;
         }
 <span class="cstat-no" title="statement not covered" >        return false;</span>
@@ -471,8 +497,9 @@ contract DronContract is ERC721 {
     function _QuitarPosicionArray(uint256 ID, uint key) internal {
         Dron memory dron = _Drones[ID];
         <span class="missing-if-branch" title="else path not taken" >E</span>require(key &lt; dron._Pesticidas.length);
-        dron._Pesticidas[key] = dron._Pesticidas[dron._Pesticidas.length-1];
+        _Drones[ID]._Pesticidas[key] = dron._Pesticidas[dron._Pesticidas.length-1];
         _Drones[ID]._Pesticidas.pop();
+        DRONES[ID-1]._Pesticidas.pop();
     }
 &nbsp;
     function BajaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool result)
@@ -526,7 +553,7 @@ contract DronContract is ERC721 {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 23 2022 16:42:31 GMT+0000 (hora estándar de Europa occidental)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 25 2022 18:24:11 GMT+0000 (hora estándar de Europa occidental)
 </div>
 </div>
 <script src="../prettify.js"></script>
