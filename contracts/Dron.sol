@@ -66,6 +66,7 @@ contract DronContract is ERC721 {
     function ConfigurarEmpresa(uint256 ID, address EMPRESA) public SoloPropietario(ID) returns (bool)
     {
         _Drones[ID]._Empresa = EMPRESA;
+        DRONES[ID-1]._Empresa = EMPRESA;
         return true;
     }
 
@@ -73,10 +74,13 @@ contract DronContract is ERC721 {
     {
         require (MIN > 0, "VALOR < 0");
         require (MAX >= MIN, "MAX < MIN");
+
+        // uint256 IDd;
+        // IDd = ID - 1;
         _Drones[ID]._Altitud_MIN = MIN;
         _Drones[ID]._Altitud_MAX = MAX;
-        DRONES[ID]._Altitud_MIN = MIN;
-        DRONES[ID]._Altitud_MAX = MAX;
+        DRONES[ID - 1]._Altitud_MIN = MIN;
+        DRONES[ID - 1]._Altitud_MAX = MAX;
         return (_Drones[ID]._Altitud_MIN, _Drones[ID]._Altitud_MAX);
     }
 
@@ -84,6 +88,7 @@ contract DronContract is ERC721 {
     {
         require (COSTE > 0, "COSTE = 0");
         _Drones[ID]._Coste = COSTE;
+        DRONES[ID-1]._Coste = COSTE;
         return true;
     }
 
@@ -102,6 +107,7 @@ contract DronContract is ERC721 {
         int key = BuscarPesticida(ID, PESTICIDA);
         if (key < 0) {
             _Drones[ID]._Pesticidas.push(PESTICIDA);
+            DRONES[ID-1]._Pesticidas.push(PESTICIDA);
             return true;
         }
         return false;
@@ -112,6 +118,7 @@ contract DronContract is ERC721 {
         require(key < dron._Pesticidas.length);
         dron._Pesticidas[key] = dron._Pesticidas[dron._Pesticidas.length-1];
         _Drones[ID]._Pesticidas.pop();
+        DRONES[ID-1]._Pesticidas.pop();
     }
 
     function BajaPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloEmpresa(ID) returns (bool result)

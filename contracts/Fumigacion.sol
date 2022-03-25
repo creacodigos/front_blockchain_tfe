@@ -54,6 +54,7 @@ contract FumigacionContract is Ownable {
         require (_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._Finalizada == false, "LA FUMIGACION YA HA SIDO REALIZADA");
         //Enciar al dron a fumigar
         _Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._Finalizada = true;
+        FUMIGACIONES[IDSolicitud_Fumigacion-1]._Finalizada = true;
         emit FumigacionRealizada(_Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._IDParcela);
     }
 
@@ -102,6 +103,7 @@ contract FumigacionContract is Ownable {
         //realizar transferencia
         if (_FumiToken.transferFrom(Parcela_._Owner, Dron_._Empresa, Dron_._Coste)) {
             _Solicitudes_Fumigacion[IDSolicitud_Fumigacion]._Pagada = true;
+            FUMIGACIONES[IDSolicitud_Fumigacion-1]._Pagada = true;
         }
     }
 

@@ -61,12 +61,15 @@ contract ParcelaContract is ERC721 {
         require (MAX >= MIN, "EL VALOR DE ALTITUD MAXIMO DEBE SER MAYOR O IGUAL AL MINIMO");
         _Parcelas[ID]._Altitud_MIN = MIN;
         _Parcelas[ID]._Altitud_MAX = MAX;
+        PARCELAS[ID-1]._Altitud_MIN = MIN;
+        PARCELAS[ID-1]._Altitud_MAX = MAX;
         return ( _Parcelas[ID]._Altitud_MIN,  _Parcelas[ID]._Altitud_MAX);
     }
 
     function ConfigurarPesticida(uint256 ID, TiposContract._Pesticidas PESTICIDA) public SoloPropietario(ID) returns (bool)
     {
         _Parcelas[ID]._Pesticida = PESTICIDA;
+        PARCELAS[ID-1]._Pesticida = PESTICIDA;
         return true;
     }
 

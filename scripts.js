@@ -32,10 +32,10 @@ const abis = {
 };
 
 const addresses = {
-    Parcela : '0x9b560f2340CD502B9DD6EB37D6fc53e225cae483',
-    Dron : '0x57fb7C58B56B2f0a08616C7973FB63E60297B855',
-    FumiToken : '0x172989F2F4efAcB3FF638ac29C11387784626500',
-    Fumigacion : '0x805fa61D2421c1AdB02E52Bf570fd83d54B55525'
+    Parcela : '0xDAFdF7668904fcb4176c5F62156A56c2De62B617',
+    Dron : '0xe9BBA7406014ac5bBB503B816217906cce90058B',
+    FumiToken : '0x7414D111A72f89C36d177Cb9f90308831BD8CD22',
+    Fumigacion : '0x6CaC345b9E24b47c269e489656B1803CD53bE1D4'
 }
 
 const Pesticidas = [
@@ -408,6 +408,10 @@ async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = 
         else if(metodo == 'BuscarPesticida')
         {
             respuesta = respuesta?._hex == '0x00' ? 'Coincide' : 'NO Coincide';
+        }
+        else if(metodo == 'balanceOf')
+        {
+            respuesta = parseInt(respuesta?.toString()) || respuesta;
         }
 
         console.table(respuesta);
