@@ -110,7 +110,13 @@ Compilar con HardHat:
 
 Lanzar test:
 
+`yarn  hardhat test`
+
 `yarn  hardhat test ./testHardhat/Dron.js`
+
+Lanzar Coverage:
+
+`yarn  hardhat coverage`
 
 
 ------
