@@ -284,7 +284,7 @@ async function sendMethod(contrato = 'FumiToken', metodo = 'decimals', params = 
 
         if(account == null)
         {
-            window.alert("No tienes cuenta vinculada");
+            //window.alert("No tienes cuenta vinculada");
             return false;
         }
 
