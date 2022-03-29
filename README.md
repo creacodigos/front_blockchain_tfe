@@ -191,3 +191,82 @@ sequenceDiagram
 
 # PENDIENTE
 - Análisis de seguridad de la solución desarrollada.
+-----
+
+# DIAGRAMAS DE SECUENCIA:
+
+En esta fabulosa web se pueden crear los diagramas con texto:
+https://mermaid.live/
+
+Aquí la guía para crearlos: https://mermaid-js.github.io/mermaid/#/sequenceDiagram
+
+Este creo que sería el diagrama de secuencia completo:
+https://mermaid.live/view#pako:eNrFU0tOAzEMvUqULeUCs6gEpexAiF83s3ETQ9NmkpI4RQhxJFYcoRfDmTBMByrEAomsMvZ79vPz5Fkqr1FWMuJDQqfwxMB9gKZ2gg8o8kHcRAy1K5F8PxyPD2Y4r8SRUqhRgHjEeUlzmLNnSNBAXFVi4h0qgiBmYC1SAeXTQQboW7BGgzLbNye4booJgvGF9ElgRtt8AoEwgFClhYaCO_eEwm-wyB71xS8wNIaM9plBxnHtbqgvnGPr1WqyAOMqcWrT0os7ExoeggK4CEoZbhn3-DFdokp52usOmCeJfh5QoG37BiC_36rTtsdfOtRW1IN2u6NN3Wb76nOZXbm9gB77nWi4Lu99HbzC2KneIXQSLjGuE0aCXkR2K7vWJpOlVuEv94Cdwf0SBmsYbsFa9kPDzwvY78gH9T_MkCPZ8K8KRvOrfM7QWtICG6xlxVcNYVXL2r0wLq01EE614VcqKwoJRxIS-asnp7rvgvl41SX48g7zZ1fQ
+```
+sequenceDiagram
+    actor User
+
+    User->>+Web: Accede a web
+    Web->>Metamask: Conectar Wallet
+        Metamask->>Metamask: Validación de usuario
+    Metamask-->>Web: Cartera conectada
+    Note over User,Metamask: Permitido continuar
+
+    Note over User,BlockChain: Flujo firmar transacciones
+    User->>+Web: Ejecutar Transacción sobre el contrato
+    Web->>Metamask: Firmar
+        Metamask->>Metamask: Validación de usuario
+    Metamask-->>Web: Firmado
+    Web->>BlockChain: Envío de Transacción
+        BlockChain->>BlockChain: Enviado a procesar
+    BlockChain-->>Web: Respuesta
+    Web-->>+User: Resultado
+
+    Note over User,BlockChain: Flujo ejecutar acciones
+
+    User->>Web: Ejecutar llamada sobre el contrato
+    Web->>BlockChain: Envío de llamada
+        BlockChain->>BlockChain: Enviado a procesar
+    BlockChain-->>Web: Respuesta
+    Web-->>+User: Resultado
+```
+
+Por partes sería:
+
+Conectar cartera con metamask: https://mermaid.live/view#pako:eNpVkEFuAjEMRa8SeVt6gSyQKuiyq6plk43HsdqISVI8jiqEOBVH4GJ4CFOpXvnb78f6OQHVyOBh4kPjQrxN-CWYQ3FW2LSWlgeWhyat4j6mRc_d83r9tOPBuxcijuzQ_fLQ1za27RsrZpz23m1qYVIUt8NxZO3QXAvyj_7EMUWkdL0UZ--2qaGk2k1_BnPcj29QlAUd9RMRYQWZJWOKFu40uwLoN2cO4K2NKPsAoZyNaz8RlV9jsnDgVRqvYE7-fiy06M48PqcPzzf9DGqb
+```
+sequenceDiagram
+    autonumber
+    actor User
+    User->>+Web: Accede a web
+    Web->>Metamask: Conectar Wallet
+        Metamask->>Metamask: Validación de usuario
+    Metamask-->>Web: Cartera conectada
+```
+
+Enviar transacción con firma: https://mermaid.live/view#pako:eNplUTtSAzEMvYrHLeECW6QghI4GAmm20doaYnZtL7LMDJPJkag4Qi6GvB82GVTp897TG-moTbSoK53wI2MweO_gjcDXQUlA5hiyb5Cm2nAk9ZJKPXZKfrte3-yxqdT2HU1mILUjCAmMceefoFJsCBV2ysTABBxHpjCE-IgMHlJbqQdHHqY9JebJFegVOmdh1LWocspAbhL8IwhjsDMo2qt1d1007eYALojb8Hn-jkXm0u5iYMH-JzrRVaB6igbT7PqCMFt4wtRnTAyLiXKtcrVhmDsWJb3SHsWrs_KIY4HWmg_osdaVpBaorXUdToLLvQXGrXXyCF0xZVzp8qXnr2DmesRMjxybp1-OYqXp
+```
+sequenceDiagram
+    autonumber
+    actor User
+
+    User->>+Web: Ejecutar Transacción sobre el contrato
+    Web->>Metamask: Firmar
+        Metamask->>Metamask: Validación de usuario
+    Metamask-->>Web: Firmado
+    Web->>BlockChain: Envío de Transacción
+        BlockChain->>BlockChain: Enviado a procesar
+    BlockChain-->>Web: Respuesta
+    Web-->>+User: Resultado
+```
+Enviar llamada sin firma: https://mermaid.live/view#pako:eNplkE1OAzEMha9iZUu5wCy6AHoBEGKTjSexaGgSD46DhKoeiVNwMRIyoyLhlX_elzy9s3HsyUym0Hul7Ogh4KtgshlaYVXONc0k6-yUBZ5Ln8em97f7_QvNExzeyFVFgRgxoUcoPAsBRXCcVVB5ME3ckLvI7nR_xJAbmT--vxg8begQ9rrK_jMBPQPCIuyo4OrxD7AZe6SyVCqK1__b6aZ7_z3WqO0lszOJJGHwLY5zl1qjR0pkzdRaj3KyxuZL09XFo9LBhxaHmVQq7UzP6ukzu20emjXOsbz8AEhHe40
+```sequenceDiagram
+    autonumber
+    actor User
+
+    User->>Web: Ejecutar llamada sobre el contrato
+    Web->>BlockChain: Envío de llamada
+        BlockChain->>BlockChain: Enviado a procesar
+    BlockChain-->>Web: Respuesta
+    Web-->>+User: Resultado
+```
