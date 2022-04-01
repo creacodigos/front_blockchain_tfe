@@ -6,8 +6,8 @@
 - Justificación del uso de la tecnología blockchain para resolver el problema propuesto.
 - Análisis y modelo del sistema propuesto.
 - Descripción del entorno de desarrollo utilizado:
-    - Remix
-    - Visual Studio Code con las estensiones: 
+    - `Remix` 
+    - `Visual Studio Code` con las estensiones: 
         - Solidity
         - Solidity Visual Developer
         - Linter `solium` para verificar que lo escribimos no tiene errroes.
@@ -151,7 +151,7 @@ Lanzar Coverage:
 
 ## Gráficos y Diagramas con la extensión:
 
-Solidity Visual Developer:
+Solidity Visual Developer :
 - Surya
 - UML
 - PlantUML
@@ -165,15 +165,8 @@ Grupo de tres personas: debe incluir :
 
 - Diagrama de despliegue (Raro como ejemplo del trabajo de Juan Luis)
 - Diagrama de casos de uso (Tipo sencillo describiendo como se usa la plataforma y por donde pasan la info, transacciones, etc..)
-```
-sequenceDiagram
-    Alice->>+John: Hello John, how are you?
-    Alice->>+John: John, can you hear me?
-    John-->>-Alice: Hi Alice, I can hear you!
-    John-->>-Alice: I feel great!
-```
-- Diagrama de clases (gigantesco llamado GRAPH)
-- Diagrama de secuencia (Ejemplo del trabajo presentado con Juan Luis (artifacts)
+- Diagrama de clases **HECHO** (gigantesco llamado GRAPH)
+- Diagrama de secuencia **HECHO** (Ejemplo del trabajo presentado con Juan Luis (artifacts)
 
 # PENDIENTE
 - Análisis de seguridad de la solución desarrollada.
@@ -188,6 +181,9 @@ Aquí la guía para crearlos: https://mermaid-js.github.io/mermaid/#/sequenceDia
 
 Este creo que sería el diagrama de secuencia completo:
 https://mermaid.live/view#pako:eNrFU0tOAzEMvUqULeUCs6gEpexAiF83s3ETQ9NmkpI4RQhxJFYcoRfDmTBMByrEAomsMvZ79vPz5Fkqr1FWMuJDQqfwxMB9gKZ2gg8o8kHcRAy1K5F8PxyPD2Y4r8SRUqhRgHjEeUlzmLNnSNBAXFVi4h0qgiBmYC1SAeXTQQboW7BGgzLbNye4booJgvGF9ElgRtt8AoEwgFClhYaCO_eEwm-wyB71xS8wNIaM9plBxnHtbqgvnGPr1WqyAOMqcWrT0os7ExoeggK4CEoZbhn3-DFdokp52usOmCeJfh5QoG37BiC_36rTtsdfOtRW1IN2u6NN3Wb76nOZXbm9gB77nWi4Lu99HbzC2KneIXQSLjGuE0aCXkR2K7vWJpOlVuEv94Cdwf0SBmsYbsFa9kPDzwvY78gH9T_MkCPZ8K8KRvOrfM7QWtICG6xlxVcNYVXL2r0wLq01EE614VcqKwoJRxIS-asnp7rvgvl41SX48g7zZ1fQ
+
+![](https://mermaid.ink/img/pako:eNrFU0tOAzEMvUqULeUCs6gEpd2BEL9uZuMmLk3JJCVxilDVI7HiCL0YzkyH6UCFWCCRVRS_Zz8_xxupvEZZyIjPCZ3CCwOPAarSCT6gyAdxHzGUrnnJ99Ph8GSKs0KcKYUaBYgXnDVhfuboJRJUEJ8KMfIOFUEQU7AWqQHl00J66AewRoMyu3cnOG-KCYLxDemTwIy6-AgCYQChmhIaGtyVJxR-jY3sQZf8GkNlyGifGWQc526b-sI5t149jRZgXCEmNi29mJtQcRMUwEVQynDJeMSP8RJVyt3etcDcSfSzgAJtXTcA-eNWTeoaf-lQnVH3yh22Nnbr3ZvPaQ7ldgI67Hei4bw891XwCmOr-oDQSrjBuEoYCToR2a3sWh1MlmqFv5wDtgZ3Q-iNoT8Fa9kPDT8P4Lgje-p_mCEHsuKvCkbzVm4ytJS0wApLWfBV4xwYWMrSbRmaVhoIx9rwospiDjbiQEIif_vqlCwoJGxB-83eo7YfuABZqQ)](https://mermaid.live/edit#pako:eNrFU0tOAzEMvUqULeUCs6gEpd2BEL9uZuMmLk3JJCVxilDVI7HiCL0YzkyH6UCFWCCRVRS_Zz8_xxupvEZZyIjPCZ3CCwOPAarSCT6gyAdxHzGUrnnJ99Ph8GSKs0KcKYUaBYgXnDVhfuboJRJUEJ8KMfIOFUEQU7AWqQHl00J66AewRoMyu3cnOG-KCYLxDemTwIy6-AgCYQChmhIaGtyVJxR-jY3sQZf8GkNlyGifGWQc526b-sI5t149jRZgXCEmNi29mJtQcRMUwEVQynDJeMSP8RJVyt3etcDcSfSzgAJtXTcA-eNWTeoaf-lQnVH3yh22Nnbr3ZvPaQ7ldgI67Hei4bw891XwCmOr-oDQSrjBuEoYCToR2a3sWh1MlmqFv5wDtgZ3Q-iNoT8Fa9kPDT8P4Lgje-p_mCEHsuKvCkbzVm4ytJS0wApLWfBV4xwYWMrSbRmaVhoIx9rwospiDjbiQEIif_vqlCwoJGxB-83eo7YfuABZqQ)
+
 ```
 sequenceDiagram
     actor User
