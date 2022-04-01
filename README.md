@@ -23,11 +23,15 @@
 - Manual de usuario, incluyendo capturas de pantalla a modo de ejemplo de cada funcionalidad de la solución.
 Conclusiones.
 - Diagrama de despliegue (artifacts) 
+
+![](./diagrams/png/DiagramaDespliegue.png)
 - Diagrama de casos de uso
 - Diagrama de clases:
+
 ![](./diagrams/png/ParcelaGraphCompleto.png)
 	
 - Diagrama de secuencia:
+
 ![](https://mermaid.ink/img/pako:eNrFU0tOAzEMvUqULeUCs6gEpd2BEL9uZuMmLk3JJCVxilDVI7HiCL0YzkyH6UCFWCCRVRS_Zz8_xxupvEZZyIjPCZ3CCwOPAarSCT6gyAdxHzGUrnnJ99Ph8GSKs0KcKYUaBYgXnDVhfuboJRJUEJ8KMfIOFUEQU7AWqQHl00J66AewRoMyu3cnOG-KCYLxDemTwIy6-AgCYQChmhIaGtyVJxR-jY3sQZf8GkNlyGifGWQc526b-sI5t149jRZgXCEmNi29mJtQcRMUwEVQynDJeMSP8RJVyt3etcDcSfSzgAJtXTcA-eNWTeoaf-lQnVH3yh22Nnbr3ZvPaQ7ldgI67Hei4bw891XwCmOr-oDQSrjBuEoYCToR2a3sWh1MlmqFv5wDtgZ3Q-iNoT8Fa9kPDT8P4Lgje-p_mCEHsuKvCkbzVm4ytJS0wApLWfBV4xwYWMrSbRmaVhoIx9rwospiDjbiQEIif_vqlCwoJGxB-83eo7YfuABZqQ)](https://mermaid.live/edit#pako:eNrFU0tOAzEMvUqULeUCs6gEpd2BEL9uZuMmLk3JJCVxilDVI7HiCL0YzkyH6UCFWCCRVRS_Zz8_xxupvEZZyIjPCZ3CCwOPAarSCT6gyAdxHzGUrnnJ99Ph8GSKs0KcKYUaBYgXnDVhfuboJRJUEJ8KMfIOFUEQU7AWqQHl00J66AewRoMyu3cnOG-KCYLxDemTwIy6-AgCYQChmhIaGtyVJxR-jY3sQZf8GkNlyGifGWQc526b-sI5t149jRZgXCEmNi29mJtQcRMUwEVQynDJeMSP8RJVyt3etcDcSfSzgAJtXTcA-eNWTeoaf-lQnVH3yh22Nnbr3ZvPaQ7ldgI67Hei4bw891XwCmOr-oDQSrjBuEoYCToR2a3sWh1MlmqFv5wDtgZ3Q-iNoT8Fa9kPDT8P4Lgje-p_mCEHsuKvCkbzVm4ytJS0wApLWfBV4xwYWMrSbRmaVhoIx9rwospiDjbiQEIif_vqlCwoJGxB-83eo7YfuABZqQ)
 	
 
@@ -163,7 +167,7 @@ Solidity Visual Developer :
 
 Grupo de tres personas: debe incluir :
 
-- Diagrama de despliegue (Raro como ejemplo del trabajo de Juan Luis)
+- Diagrama de despliegue **HECHO** (Raro como ejemplo del trabajo de Juan Luis)
 - Diagrama de casos de uso (Tipo sencillo describiendo como se usa la plataforma y por donde pasan la info, transacciones, etc..)
 - Diagrama de clases **HECHO** (gigantesco llamado GRAPH)
 - Diagrama de secuencia **HECHO** (Ejemplo del trabajo presentado con Juan Luis (artifacts)
