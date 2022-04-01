@@ -1,6 +1,6 @@
 # front_blockchain_tfe
 
-# Documentación:
+# Documentación:
 ## Memoria con:
 
 - Justificación del uso de la tecnología blockchain para resolver el problema propuesto.
