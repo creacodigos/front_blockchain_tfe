@@ -1,7 +1,55 @@
 # front_blockchain_tfe
 
-# Documentación:
+# Trabajo Final de Experto:
+## Experto Universitario en Desarrollo de Aplicaciones Blockchain
+
+Una empresa ha desarrollado un sistema de fumigación con drones y nos ha solicitado que desarrollemos una solución basada en la blockchain
+
+Trabajo realizado por:
+
+- DOMÍNGUEZ PÉREZ, IVÁN ENRIQUE
+- SANTANA RODRÍGUEZ, JORGE F
+- HERNANDEZ OAKNIN, YAEL MAZALTOB
+
+Solución desplegada en la red de test Rinkeby de Ethereum: https://rinkeby.etherscan.io/
+
+Instalación de MetaMask: https://metamask.io/download/
+
+## Enunciado: 
+
+Una empresa ha desarrollado un sistema de fumigación con drones y nos ha solicitado que desarrollemos una solución basada en la blockchain de Alastria para su uso.
+
+Las características propias de los drones son:
+
+- Un identificador único y ascendente, comenzando en 1 y que no puede repetirse.
+- La empresa que lo gestiona, que será la única que pueda mandar acciones al dron.
+Altura máxima y mínima de vuelo.
+- Una lista de pesticidas que puede suministrar. Los pesticidas existentes son cinco y sus nombres son: Pesticida A, Pesticida B, Pesticida C, Pesticida D y Pesticida E.
+- Coste.
+
+La operación de fumigación es inmediata y debe lanzar un evento de parcela fumigada con el ID de la parcela.
+
+Las características de las parcelas son:
+
+- Un identificador único y ascendente, que comienza en 1 y que no puede repetirse.
+- Un propietario.
+- Altura máxima y mínima de vuelo permitida.
+- Pesticida aceptado, que va a ser uno de la lista de pesticidas descrita anteriormente.
+
+Otras operaciones que debe suministrar la plataforma son:
+
+- Contratar un dron a la empresa para desinfectar una parcela con un pesticida determinado. Esta operación debe lanzar un evento con el ID del Dron que va a realizar la fumigación y el ID de la parcela que se va a fumigar.
+- Pago de la operación realizada desde la cuenta del propietario a la de la empresa.
+- Para la gestión de pagos se debe crear un token propio basado en el estándar ERC 20. Además, los drones y las parcelas pueden gestionarse mediante tokens no fungibles basados en el estándar ERC 721.
+
+La empresa solicita tener una interfaz web que le permita registrar los drones y asignarles trabajos. A su vez, también se debe proporcionar una interfaz web para que los propietarios de las parcelas las puedan registrar y tengan la posibilidad de contratar un dron con las características que requiere su parcela y que pueda desplazarse hasta la misma.
+
+
+# Entregables:
 ## Memoria con:
+
+Como resultado de las actividades propuestas en el apartado anterior el alumno deberá entregar:
+Una memoria en la que se incluya la siguiente información:
 
 - Justificación del uso de la tecnología blockchain para resolver el problema propuesto.
 - Análisis y modelo del sistema propuesto.
@@ -159,22 +207,8 @@ Solidity Visual Developer :
 - Surya
 - UML
 - PlantUML
-- Inheritance. Genera un gráfico en formato DOT con el árbol de herencia.
-- Parse. Genera un árbol con los objetos AST.)
-- `PENDIENTE` mythril > https://github.com/ConsenSys/mythril
-
-## Documentación
-
-Grupo de tres personas: debe incluir :
-
-- Diagrama de despliegue **HECHO** (Raro como ejemplo del trabajo de Juan Luis)
-- Diagrama de casos de uso (Tipo sencillo describiendo como se usa la plataforma y por donde pasan la info, transacciones, etc..)
-- Diagrama de clases **HECHO** (gigantesco llamado GRAPH)
-- Diagrama de secuencia **HECHO** (Ejemplo del trabajo presentado con Juan Luis (artifacts)
-
-# PENDIENTE
-- Análisis de seguridad de la solución desarrollada.
------
+- Inheritance.
+- Parse.
 
 # DIAGRAMAS DE SECUENCIA:
 
